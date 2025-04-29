@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Create an Account </title>
+ </head>
+ <body>
+    <h1> SCSU Study Group Finder </h1>
+    <!-- user is creating their study group finder account -->
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.fullname.label }} {{ form.fullname() }}<br>
+    {{ form.schoolemail.label }} {{ form.schoolemail() }}
+    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.verifypassword.label }} {{ form.verifypassword() }}
+    {{ form.submit() }} <br> <br>
+    
+    <br>
+    <script>
+        function accountButton() {
+            doucment.getElementById("accountButton").onclick = function() {
+                window.location.href = "/register";
+            };
+        }
+    </script>
+ </body>
+</html> 

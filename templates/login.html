@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login </title>
+ </head>
+ <body>
+
+    <h1> SCSU Study Group Finder </h1>
+    <!--user is logging into their account -->
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.email.label }} {{ form.email() }}<br>
+    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.submit() }} <br> <br>
+    <button type="button"> Create an Account</button>
+    <br>
+    <script>
+        function accountButton() {
+            doucment.getElementById("accountButton").onclick = function() {
+                window.location.href = "/register";
+            };
+        }
+    </script>
+ </body>
+</html> 
