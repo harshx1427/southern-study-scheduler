@@ -3,9 +3,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Login </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'login_styles.css') }}">"
+   
  </head>
  <body>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'login_styles.css') }}">
 
     <h1> SCSU Study Group Finder </h1>
     <!--user is logging into their account -->
@@ -14,7 +15,7 @@
     {{ form.email.label }} {{ form.email() }}<br>
     {{ form.password.label }} {{ form.password() }}<br>
     {{ form.submit() }} <br> <br>
-    <button type="button"> Create an Account</button>
+    <button type="button"> Create an Account </button>
     <br>
     <script>
         function accountButton() {
