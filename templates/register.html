@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Create an Account </title>
+ </head>
+ <body>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'login_styles.css') }}">
+    <h1> SCSU Study Group Finder </h1>
+    <!-- user is creating their study group finder account -->
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.fullname.label }} {{ form.fullname() }}<br>
+    {{ form.schoolemail.label }} {{ form.schoolemail() }}
+    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.verifypassword.label }} {{ form.verifypassword() }}
+    {{ form.submit() }} <br> <br>
+    
+    <br>
+    <script>
+       
+    </script>
+ </body>
+</html> 
