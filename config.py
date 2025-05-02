@@ -5,9 +5,6 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../instance/study_scheduler.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-class DevelopmentConfig:
-    DEBUG = True
-
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
