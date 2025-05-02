@@ -5,13 +5,17 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../instance/study_scheduler.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+class DevelopmentConfig(Config):
+        DEBUG = True
 
-    ADMIN_EMAILS = ['admin@southernct.edu']
+
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+
+ADMIN_EMAILS = ['admin@southernct.edu']
 
 
 
