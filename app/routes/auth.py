@@ -18,6 +18,7 @@ class LoginForm(FlaskForm):
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    #So line 22-23. Flask sees that you're already logged in, so it immediately redirects you to /dashboard
     if current_user.is_authenticated:
         return redirect(url_for('main.dashboard'))
     form = LoginForm()
@@ -58,7 +59,6 @@ def register():
 
 @auth_bp.route('/logout')
 @login_required
-
 def logout():
     logout_user()
     flash('You have been logged out.', 'success')
