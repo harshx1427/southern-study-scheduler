@@ -4,9 +4,15 @@ from flask_login import LoginManager
 from config import DevelopmentConfig
 
 
+
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    from app.models.models import User
+    return User.query.get(int(user_id))
 
 def create_app(config_object=DevelopmentConfig):
     app = Flask(__name__, instance_relative_config=True)
@@ -26,7 +32,4 @@ def create_app(config_object=DevelopmentConfig):
 
     return app
 
-@login_manager.user_loader
-def load_user(user_id):
-    from app.models.models import User
-    return User.query.get(int(user_id))
+
