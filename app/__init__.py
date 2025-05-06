@@ -7,11 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-<<<<<<< HEAD
 mail = Mail()
-=======
-
->>>>>>> 804539b0ac6863f041cfe1e56a32cebe161fa771
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -32,7 +28,7 @@ def create_app(config_object=DevelopmentConfig):
 
     from app.routes.auth import auth_bp
     from app.routes.main import main_bp
-    
+
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
 
@@ -40,5 +36,3 @@ def create_app(config_object=DevelopmentConfig):
         db.create_all()
 
     return app
-
-
