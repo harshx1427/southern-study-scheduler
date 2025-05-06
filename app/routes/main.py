@@ -50,3 +50,9 @@ def create_group():
         flash('Study group created successfully!', 'success')
         return redirect(url_for('main.dashboard'))
     return render_template('create_group.html', form=form)
+
+@main_bp.route('/groups/<int:group_id>')
+@login_required
+def view_group(group_id):
+    group = StudyGroup.query.get_or_404(group_id)
+    return render_template('view_group.html', group=group)

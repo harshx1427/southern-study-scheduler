@@ -41,7 +41,7 @@
   <ul class="group-list">
     {% for group in groups %}
       <li class="group-item">
-        <h3>{{ group.name }}</h3>
+        <h3><a href="{{ url_for('main.view_group', group_id=group.id) }}"><button>{{ group.name }}</button></a></h3>
         <p>{{ group.description }}</p>
       </li>
     {% else %}
