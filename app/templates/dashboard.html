@@ -7,19 +7,27 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
 </head>
 <body class="dashboard">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
 
-  
-    <h1>Welcome {{ current_user.name }}!</h1>
-  </header>
+  <h1>Welcome {{ current_user.name }}!</h1>
+  <header>
 
   <nav class="navbar">
     
-    <a href="{{ url_for('main.create_group') }}" class="btn">Create a Study Group</a>
+    <a href="{{ url_for('main.create_group') }}" class="btn"><button>Create a Study Group</button></a>
     
-    <a href="{{ url_for('auth.logout') }}" class="logout">Log Out</a>
+    <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
   </nav>
 
-  <header>
+  </header>
 
 </body>
 </html>
