@@ -7,19 +7,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-<<<<<<< HEAD
 mail = Mail()
-=======
-
->>>>>>> 804539b0ac6863f041cfe1e56a32cebe161fa771
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
-
-@login_manager.user_loader
-def load_user(user_id):
-    from app.models.models import User
-    return User.query.get(int(user_id))
 
 def create_app(config_object=DevelopmentConfig):
     app = Flask(__name__, instance_relative_config=True)
@@ -32,7 +23,7 @@ def create_app(config_object=DevelopmentConfig):
 
     from app.routes.auth import auth_bp
     from app.routes.main import main_bp
-    
+
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
 
@@ -41,4 +32,7 @@ def create_app(config_object=DevelopmentConfig):
 
     return app
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    from app.models.models import User
+    return User.query.get(int(user_id))
