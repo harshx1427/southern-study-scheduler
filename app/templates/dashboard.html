@@ -1,14 +1,25 @@
+<!-- app/templates/dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>dashboard</title>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
 </head>
-<body>
- 
-  <h1>Welcome User!</h1>
+<body class="dashboard">
+
   
-  <a href="{{ url_for('auth.logout') }}">Log Out</a>
+    <h1>Welcome {{ current_user.name }}!</h1>
+  </header>
+
+  <nav class="navbar">
+    
+    <a href="{{ url_for('main.create_group') }}" class="btn">Create a Study Group</a>
+    
+    <a href="{{ url_for('auth.logout') }}" class="logout">Log Out</a>
+  </nav>
+
+  <header>
 
 </body>
 </html>
