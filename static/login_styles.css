@@ -1,62 +1,65 @@
+/* static/login_styles.css */
+
+/* ---------------- */
+/* Login-page styles (unchanged) */
+/* ---------------- */
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f4f8;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .login-container {
-    background-color: #ffffff;
-    padding: 2rem 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .login-container h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-  
-  .form-group {
-    margin-bottom: 1.2rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #555;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 0.7rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.8rem;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #003d80;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* … your existing login CSS … */
+
+/* ---------------- */
+/* Shared nav/link styles */
+/* ---------------- */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #ffffff;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.logout {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.logout:hover {
+  text-decoration: underline;
+}
+
+/* ---------------- */
+/* Dashboard overrides */
+/* ---------------- */
+
+body.dashboard {
+  display: block;    /* cancel the flex centering */
+  padding-top: 1rem;
+}
+
+body.dashboard .btn {
+  border-radius: 0;  /* squared corners */
+}
+
+body.dashboard .navbar {
+  justify-content: space-between;  /* Create left, Logout right */
+}

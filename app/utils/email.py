@@ -1,4 +1,4 @@
-from flask_mail import Message
+"""from flask_mail import Message
 from app import mail
 import os
 
@@ -10,3 +10,4 @@ def send_email(subject, recipients, body):
         body=body
     )
     mail.send(msg)
+"""
