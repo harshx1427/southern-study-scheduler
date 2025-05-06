@@ -20,8 +20,8 @@ class LoginForm(FlaskForm):
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     #So line 22-23. Flask sees that you're already logged in, so it immediately redirects you to /dashboard
-    '''if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))'''
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(southern_email=form.southern_email.data).first()
@@ -42,8 +42,8 @@ class RegistrationForm(FlaskForm):
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
-    '''if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))'''
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
     
     form = RegistrationForm()
     if form.validate_on_submit():
