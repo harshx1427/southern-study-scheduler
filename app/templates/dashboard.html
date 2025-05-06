@@ -1,8 +1,8 @@
-<!-- app/templates/dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
 </head>
@@ -21,6 +21,7 @@
   <header>
 
   <nav class="navbar">
+    <a href="{{ url_for('main.create_group') }}" class="btn"><button> Create a Study Group</button></a>
     
     <a href="{{ url_for('main.create_group') }}" class="btn"><button>Create a Study Group</button></a>
     

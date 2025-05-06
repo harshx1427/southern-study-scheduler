@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
@@ -21,7 +21,17 @@ def index():
 @main_bp.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', name=current_user.name)
+    q = request.args.get('q', '').strip()
+
+    if q:
+        groups = StudyGroup.query.filter(
+            StudyGroup.name.ilike(f'%{q}%')
+        ).all()
+
+    else: 
+        groups = StudyGroup.query.all()
+
+    return render_template('dashboard.html', name=current_user.name, groups=groups, q=q)
 
 # New route to create a study group
 
