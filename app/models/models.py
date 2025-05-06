@@ -1,13 +1,8 @@
 from flask_login import UserMixin
 from app import db
 from datetime import datetime
-from flask_login import UserMixin
 
-<<<<<<< HEAD
-class User(db.Model, UserMixin):
-=======
 class User(UserMixin, db.Model):
->>>>>>> 804539b0ac6863f041cfe1e56a32cebe161fa771
     __tablename__ = "users"
 
     id             = db.Column(db.Integer, primary_key=True)
