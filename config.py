@@ -13,6 +13,8 @@ class Config:
 
     ADMIN_EMAILS = ['admin@southernct.edu']
 
+class DevelopmentConfig(Config):
+    DEBUG = True
 
 class DevelopmentConfig(Config):
     DEBUG = True

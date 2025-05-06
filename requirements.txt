@@ -3,3 +3,6 @@ Flask-WTF
 Flask-SQLAlchemy
 Flask-Login
 WTForms
+email-validator
+Flask-Mail
+python-dotenv
