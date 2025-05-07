@@ -22,7 +22,6 @@
 
   <nav class="navbar">
     <a href="{{ url_for('main.create_group') }}" class="btn"><button> Create a Study Group</button></a>
-    
     <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
   </nav>
 
@@ -41,8 +40,23 @@
   <ul class="group-list">
     {% for group in groups %}
       <li class="group-item">
-        <h3><a href="{{ url_for('main.view_group', group_id=group.id) }}"><button>{{ group.name }}</button></a></h3>
+        <h3>
+          <a href="{{ url_for('main.view_group', group_id=group.id) }}">
+          <button>{{ group.name }}</button>
+        </a>
+      </h3>
         <p>{{ group.description }}</p>
+
+        <!-- Join/Leave-->
+         {% if group.id in member_group_ids %}
+          <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
+            <button type="submit" class="btn">Leave Group</button>
+          </form>
+        {% else %}
+          <form method="POST" action="{{ url_for('main.join_group', group_id=group.id) }}">
+            <button type="submit" class="btn">Join Group</button>
+          </form>
+        {% endif %}
       </li>
     {% else %}
       <li>No groups found.</li>

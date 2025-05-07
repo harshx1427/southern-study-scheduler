@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import DevelopmentConfig
 #from flask_mail import Mail
 #from dotenv import load_dotenv
-
 #load_dotenv()
+
+
 
 #mail = Mail()
 db = SQLAlchemy()
@@ -27,11 +28,16 @@ def create_app(config_object=DevelopmentConfig):
     login_manager.init_app(app)
 
     from app.routes.auth import auth_bp
-    from app.routes.main import main_bp
-
     app.register_blueprint(auth_bp)
+    
+    from app.routes.main import main_bp
     app.register_blueprint(main_bp)
 
+
+    @app.route('/')
+    def root():
+        return redirect(url_for(auth.login))
+    
     with app.app_context():
         db.create_all()
 
