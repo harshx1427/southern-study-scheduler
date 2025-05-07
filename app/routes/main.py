@@ -56,7 +56,7 @@ def create_group():
         )
         db.session.add(group)
         db.session.commit()
-        flash('Study group created successfully!', 'success')
+        flash('Study group created successfully!', 'group_success')
         return redirect(url_for('main.dashboard'))
     return render_template('create_group.html', form=form)
 
