@@ -21,8 +21,11 @@ class StudyGroup(db.Model):
     __tablename__ = "study_groups"
 
     id             = db.Column(db.Integer, primary_key=True)
+    subject        = db.Column(db.String(50), nullable=False)
+    meet_time      = db.Column(db.DateTime, nullable=False)
     name           = db.Column(db.String(100), nullable=False)
     description    = db.Column(db.Text)
+    location       = db.Column(db.String(200), nullable=False)
     created_by_id  = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     created_at     = db.Column(db.DateTime, default=datetime.utcnow)
 
