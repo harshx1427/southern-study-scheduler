@@ -59,11 +59,11 @@ def register():
         db.session.commit()
 
         #This will be the message the app send, when user register
-        send_email(
+        '''send_email(
             subject='Welcome to Study Group Finder!',
             recipients=[form.southern_email.data],
             body='Thanks for registering. You can now log in and join study groups!'
-        )
+        )'''
 
         flash('Your account has been created! Please log In.', 'success')
         return redirect(url_for('auth.login'))
