@@ -2,13 +2,7 @@ from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import DevelopmentConfig
-#from flask_mail import Mail
-#from dotenv import load_dotenv
-#load_dotenv()
 
-
-
-#mail = Mail()
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

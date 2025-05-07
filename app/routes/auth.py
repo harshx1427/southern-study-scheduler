@@ -7,8 +7,6 @@ from werkzeug.security import check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from app import db
 from app.models.models import User
-#from app.utils.email import send_email
-from app.routes.main import main_bp
 
 
 auth_bp = Blueprint('auth', __name__)
@@ -57,13 +55,6 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
-
-        #This will be the message the app send, when user register
-        '''send_email(
-            subject='Welcome to Study Group Finder!',
-            recipients=[form.southern_email.data],
-            body='Thanks for registering. You can now log in and join study groups!'
-        )'''
 
         flash('Your account has been created! Please log In.', 'success')
         return redirect(url_for('auth.login'))
