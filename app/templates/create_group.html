@@ -1,17 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Study Group</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #eef3f9;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #0077cc;
+      color: white;
+    }
+
+    /* ✅ Nav bar styles */
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: #005fa3;
+      padding: 10px;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu a:hover {
+      text-decoration: underline;
+    }
+
+    .form-container {
+      width: 400px;
+      margin: 40px auto;
+      padding: 25px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container div {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.85em;
+    }
+
+    .btn {
+      background-color: #0077cc;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #005fa3;
+    }
+
+    .flashes {
+      list-style-type: none;
+      padding: 0;
+      margin: 20px auto;
+      width: 400px;
+      text-align: center;
+    }
+
+    .flashes li {
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .success {
+      background-color: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .danger {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Create a New Study Group</h1>
   </header>
 
-  <!-- Flash messages (e.g. after commit) -->
+  <!-- ✅ Top horizontal navigation -->
+  <div class="menu">
+    <a href="{{ url_for('main.dashboard') }}">Home</a>
+    <a href="#">Listings</a>
+    <a href="{{ url_for('main.create_group') }}">Groups</a>
+    <a href="{{ url_for('auth.message') }}">Messages</a>
+  </div>
+
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <ul class="flashes">
@@ -22,63 +126,54 @@
     {% endif %}
   {% endwith %}
 
-  <!-- 1) Make sure action points at the route, method is POST -->
-  <form method="POST" action="{{ url_for('main.create_group') }}">
-    <!-- 2) Hidden field for CSRF token (required by FlaskForm) -->
-    {{ form.hidden_tag() }}
+  <div class="form-container">
+    <form method="POST" action="{{ url_for('main.create_group') }}">
+      {{ form.hidden_tag() }}
 
-    <!-- 3) Subject field + errors -->
-    <div>
-      {{ form.subject.label }}<br>
-      {{ form.subject(size=30) }}<br>
-      {% for err in form.subject.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.subject.label }}<br>
+        {{ form.subject(size=30) }}<br>
+        {% for err in form.subject.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
-    <!-- 4) Meeting time field + errors -->
-    <div>
-      {{ form.meet_time.label }}<br>
-      {{ form.meet_time() }} <small>(YYYY-MM-DD HH:MM)</small><br>
-      {% for err in form.meet_time.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.meet_time.label }}<br>
+        {{ form.meet_time() }} <small>(YYYY-MM-DD HH:MM)</small><br>
+        {% for err in form.meet_time.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
-    <!-- 5) Location field + errors -->
-    <div>
-      {{ form.location.label }}<br>
-      {{ form.location(size=40) }}<br>
-      {% for err in form.location.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.location.label }}<br>
+        {{ form.location(size=40) }}<br>
+        {% for err in form.location.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
-    <!-- 6) Name field + errors -->
-    <div>
-      {{ form.name.label }}<br>
-      {{ form.name(size=40) }}<br>
-      {% for err in form.name.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.name.label }}<br>
+        {{ form.name(size=40) }}<br>
+        {% for err in form.name.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
-    <!-- 7) Description field + errors -->
-    <div>
-      {{ form.description.label }}<br>
-      {{ form.description(rows=4, cols=40) }}<br>
-      {% for err in form.description.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.description.label }}<br>
+        {{ form.description(rows=4, cols=40) }}<br>
+        {% for err in form.description.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
-    <!-- 8) Submit button -->
-    <div>
-      {{ form.submit(class="btn") }}
-    </div>
-  </form>
-
-  <p><a href="{{ url_for('main.dashboard') }}">← Back to Dashboard</a></p>
+      <div>
+        {{ form.submit(class="btn") }}
+      </div>
+    </form>
+  </div>
 </body>
 </html>
-

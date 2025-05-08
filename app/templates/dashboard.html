@@ -19,6 +19,14 @@
     {% endif %}
   {% endwith %}
 
+  <div class="menu">
+        
+    <a href="{{ url_for('main.dashboard')}}"> Home </a>
+    <a href="#"> Listings </a>
+    <a href="{{ url_for('main.create_group')}}"> Groups </a>
+    <a href="{{ url_for('auth.message')}}"> Messages </a>
+  </div>
+
   <h1>Welcome {{ current_user.name }}!</h1>
   <header>
 

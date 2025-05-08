@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
-from app import db
+from flask import current_app
 from app.models.models import User
 from app.routes.main import main_bp
 
@@ -40,6 +40,11 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
+
+@auth_bp.route('/messages')
+def message():
+    return render_template('messages.html')
+
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
