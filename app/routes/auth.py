@@ -1,13 +1,12 @@
 from flask import Blueprint, app, render_template,redirect, url_for, flash, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from app import db
-from app.models.models import User
-#from app.utils.email import send_email
+from app.models.models import User, Message
 from app.routes.main import main_bp
 
 
@@ -76,3 +75,25 @@ def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('main.index'))
+
+
+
+class MessageForm(FlaskForm):
+    content = TextAreaField('Leave a comment', validators=[DataRequired(), Length(max=1000)])
+    submit = SubmitField('Post')
+
+
+@auth_bp.route('/message', methods=['GET', 'POST'])
+@login_required
+def message():
+    form = MessageForm()
+    if form.validate_on_submit():
+        new_msg = Message(author_id=current_user.id, content=form.content.data)
+        db.session.add(new_msg)
+        db.session.commit()
+        flash('Your message was posted!', 'success')
+        return redirect(url_for('auth.message'))
+
+    all_messages = Message.query.order_by(Message.posted_at.desc()).all()
+    return render_template('message.html', form=form, messages=all_messages)
+
