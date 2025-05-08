@@ -3,40 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <title>Message</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='home_styles.css') }}">
+
+  <style>
+  .notif-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  </style>
+
 </head>
 <body>
   <div class="menu">
 
-        <a href="{{ url_for('main.dashboard') }}"> Home </a>
-        <a href="#"> Listings </a>
-        <a href="{{ url_for('main.create_group') }}"> Groups </a>
-        <a href="{{ url_for('auth.message') }}"> Messages </a>
+    <a href="{{ url_for('main.dashboard') }}"> Home </a>
+    <a href="{{ url_for('main.create_group') }}"> Groups </a>
+    <a href=""> Listing </a>
+    <a href="{{ url_for('auth.message') }}">
+      Messages
+      {% if unread_count > 0 %}
+        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+      {% endif %}
+    </a>
+    <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
 
   </div>
 
-  <h1>Message Board</h1>
+  <h1>Message Board</h1><br>
 
-  <form method="POST">
-    {{ form.hidden_tag() }}
-    <p>{{ form.recipient_id.label }} {{ form.recipient_id() }}</p>
-    <p>{{ form.content.label }}<br>{{ form.content(rows=4) }}</p>
-    <p>{{ form.submit() }}</p>
+  <h3>Recent Conversations</h3>
+  <ul>
+    {% for user, unread in recent_contacts %}
+      <li>
+        <button><a href="{{ url_for('auth.message_user', user_id=user.id) }}">
+          {{ user.name }}
+          {% if unread > 0 %}
+            <span class="notif-dot"></span>
+          {% endif %}
+        </a></button>
+      </li>
+    {% else %}
+      <li>No recent conversations</li>
+    {% endfor %}
+  </ul>
+
+  <form method="GET" action="{{ url_for('auth.message') }}">
+    <input
+      type="text"
+      id="user-search"
+      placeholder="Search users..."
+      autocomplete="off">
+    <div id="suggestions" style="border: 1px solid #ccc; display: none;"></div>
+
+    <button type="submit">Search</button>
   </form>
+
+  {% if search_results %}
+    <h3>Search Results</h3>
+    {% for user in search_results %}
+      <div>
+        <strong>{{ user.name }}</strong> ({{ user.southern_email }})
+        <form method="POST" action="{{ url_for('auth.message') }}">
+          {{ form.hidden_tag() }}
+          <input type="hidden" name="recipient_id" value="{{ user.id }}">
+          {{ form.content.label }}<br>
+          {{ form.content(rows=2, cols=40) }}<br>
+          {{ form.submit(value='Send Message') }}
+        </form>
+      </div>
+    {% endfor %}
+  {% endif %}
 
   <hr>
 
-  <h3>Messages you received:</h3>
+  <h3>Your Sent Messages</h3>
   <ul>
-    {% for message in messages %}
+    {% for msg in messages %}
       <li>
-        From: {{ message.sender_user.name }}<br>
-        {{ message.content }}<br>
-        <small>{{ message.posted_at }}</small>
+        To {{ msg.receiver_user.name }}: {{ msg.content }} <em>({{ msg.posted_at }})</em>
       </li>
     {% endfor %}
   </ul>
 
+  <script>
+  const input = document.getElementById("user-search");
+  const suggestionsBox = document.getElementById("suggestions");
+
+  input.addEventListener("input", async () => {
+    const query = input.value.trim();
+    if (query.length < 2) {
+      suggestionsBox.style.display = "none";
+      return;
+    }
+
+    const res = await fetch(`/api/user_suggestions?q=${query}`);
+    const users = await res.json();
+
+    if (users.length === 0) {
+      suggestionsBox.innerHTML = "<p>No matches</p>";
+      suggestionsBox.style.display = "block";
+      return;
+    }
+
+    suggestionsBox.innerHTML = "";
+    users.forEach(user => {
+      const div = document.createElement("div");
+      div.innerHTML = `${user.name} (${user.email})`;
+      div.style.cursor = "pointer";
+      div.onclick = () => {
+        window.location.href = `/message/${user.id}`;
+      };
+      suggestionsBox.appendChild(div);
+    });
+
+    suggestionsBox.style.display = "block";
+  });
+  </script>
 
 </body>
 </html>

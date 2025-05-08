@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Create Study Group</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='home_styles.css') }}">
+
 </head>
 <body>
   <header>
@@ -23,10 +23,16 @@
   {% endwith %}
   <div class="menu">
 
-        <a href="{{ url_for('main.dashboard') }}"> Home </a>
-        <a href="#"> Listings </a>
-        <a href="{{ url_for('main.create_group') }}"> Groups </a>
-        <a href="{{ url_for('auth.message') }}"> Messages </a>
+    <a href="{{ url_for('main.dashboard') }}"> Home </a>
+    <a href="{{ url_for('main.create_group') }}"> Groups </a>
+    <a href="#"> Listings </a>
+    <a href="{{ url_for('auth.message') }}">
+      Messages
+      {% if unread_count > 0 %}
+        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+      {% endif %}
+    </a>
+    <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
 
   </div>
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send Message</title>
+
+</head>
+<body>
+  <div class="menu">
+
+    <a href="{{ url_for('main.dashboard') }}"> Home </a>
+    <a href="{{ url_for('main.create_group') }}"> Groups </a>
+    <a href=""> Listing </a>
+    <a href="{{ url_for('auth.message') }}">Messages</a>
+    <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
+
+  </div>
+
+  <a href="{{ url_for('auth.message') }}">← Back to Message</a>
+
+  <h1>Send Message to {{ recipient.name }}</h1>
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.content.label }}<br>
+    {{ form.content(rows=4, cols=50) }}<br><br>
+    {{ form.submit() }}
+  </form>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <h3>Conversation with {{ recipient.name }}</h3>
+  <ul>
+    {% for m in messages %}
+      <li>
+        <strong>{{ 'You' if m.sender_id == current_user.id else m.sender.name }}:</strong>
+        {{ m.content }}
+        <em>({{ m.posted_at.strftime('%Y-%m-%d %H:%M') }})</em>
+      </li>
+    {% endfor %}
+  </ul>
+
+</body>
+</html>
