@@ -14,7 +14,7 @@ class User(UserMixin, db.Model):
     # relationships
     groups       = db.relationship("StudyGroup", backref="creator", lazy=True)
     memberships  = db.relationship("Membership", backref="user", lazy=True)
-    messages     = db.relationship("Message", backref="author", lazy=True)
+    
 
 
 class StudyGroup(db.Model):
@@ -30,8 +30,8 @@ class StudyGroup(db.Model):
     created_at     = db.Column(db.DateTime, default=datetime.utcnow)
 
     # relationships
-    forums      = db.relationship("Forum", backref="study_group", lazy=True)
-    memberships = db.relationship("Membership", backref="study_group", lazy=True)
+    forums      = db.relationship("Forum", backref="study_group", lazy=True, cascade="all, delete-orphan")
+    memberships = db.relationship("Membership", backref="study_group", lazy=True, cascade="all, delete-orphan")
 
 
 class Forum(db.Model):
@@ -40,21 +40,40 @@ class Forum(db.Model):
     id               = db.Column(db.Integer, primary_key=True)
     study_group_id   = db.Column(db.Integer, db.ForeignKey("study_groups.id"), nullable=False)
     title            = db.Column(db.String(150), nullable=False)
+    created_by_id    = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     created_at       = db.Column(db.DateTime, default=datetime.utcnow)
 
     # relationships
-    messages = db.relationship("Message", backref="forum", lazy=True)
+    messages = db.relationship("ThreadMessage", backref="thread", lazy=True, cascade="all, delete-orphan")
+    creator = db.relationship("User", backref="forums", foreign_keys=[created_by_id])
 
-
-class Message(db.Model):
-    __tablename__ = "messages"
+class ThreadMessage(db.Model):
+    __tablename__ = "thread_messages"
 
     id         = db.Column(db.Integer, primary_key=True)
-    forum_id   = db.Column(db.Integer, db.ForeignKey("forums.id"), nullable=False)
-    author_id  = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    thread_id   = db.Column(db.Integer, db.ForeignKey("forums.id"), nullable=False)
+    author_id    = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     content    = db.Column(db.Text, nullable=False)
-    posted_at  = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    # relationships
+    author = db.relationship("User", backref="thread_messages")
+
+
+'''class Message(db.Model):
+    __tablename__ = "messages"
+
+    message_id       = db.Column(db.Integer, primary_key=True)
+    sender_user_id   = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    receiver_user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    listing_id       = db.Column(db.Integer, db.ForeignKey("study_groups.id"), nullable=False)
+    content          = db.Column(db.Text, nullable=False)
+    sent_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # relationships
+    sender   = db.relationship("User", foreign_keys=[sender_user_id], backref="sent_messages")
+    receiver = db.relationship("User", foreign_keys=[receiver_user_id], backref="received_messages")
+    listing = db.relationship("StudyGroup", backref="messages")'''
 
 class Membership(db.Model):
     __tablename__ = "memberships"
@@ -64,3 +83,5 @@ class Membership(db.Model):
     study_group_id = db.Column(db.Integer, db.ForeignKey("study_groups.id"), nullable=False)
     role           = db.Column(db.String(50), default="member")
     joined_at      = db.Column(db.DateTime, default=datetime.utcnow)
+
+    

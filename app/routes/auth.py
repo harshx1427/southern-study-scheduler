@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from app import db
-from app.models.models import User, Message
+from app.models.models import User
 from app.routes.main import main_bp
 
 
@@ -78,7 +78,7 @@ def logout():
 
 
 
-class MessageForm(FlaskForm):
+'''class MessageForm(FlaskForm):
     content = TextAreaField('Leave a comment', validators=[DataRequired(), Length(max=1000)])
     submit = SubmitField('Post')
 
@@ -94,6 +94,6 @@ def message():
         flash('Your message was posted!', 'success')
         return redirect(url_for('auth.message'))
 
-    all_messages = Message.query.order_by(Message.posted_at.desc()).all()
-    return render_template('message.html', form=form, messages=all_messages)
+    all_messages = Message.query.order_by(Message.sent_at.desc()).all()
+    return render_template('message.html', form=form, messages=all_messages)'''
 

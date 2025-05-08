@@ -4,6 +4,15 @@ from flask_login import LoginManager
 from config import DevelopmentConfig
 
 
+
+#from routes import auth
+#from flask_mail import Mail
+#from dotenv import load_dotenv
+#load_dotenv()
+
+
+
+#mail = Mail()
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -28,12 +37,14 @@ def create_app(config_object=DevelopmentConfig):
     from app.routes.main import main_bp
     app.register_blueprint(main_bp)
 
+    from app.routes.threads import threads_bp
+    app.register_blueprint(threads_bp)
 
-    '''@app.route('/')
+    @app.route('/')
     def root():
-        return redirect(url_for(auth.login))
-
+        return redirect(url_for('auth.login'))
+    
     with app.app_context():
         db.create_all()
 
-    return app'''
+    return app
