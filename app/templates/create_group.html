@@ -19,6 +19,25 @@
       color: white;
     }
 
+    /* ✅ Nav bar styles */
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: #005fa3;
+      padding: 10px;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu a:hover {
+      text-decoration: underline;
+    }
+
     .form-container {
       width: 400px;
       margin: 40px auto;
@@ -82,24 +101,20 @@
       background-color: #f8d7da;
       color: #721c24;
     }
-
-    a {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      text-decoration: none;
-      color: #0077cc;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>Create a New Study Group</h1>
   </header>
+
+  <!-- ✅ Top horizontal navigation -->
+  <div class="menu">
+    <a href="{{ url_for('main.dashboard') }}">Home</a>
+    <a href="#">Listings</a>
+    <a href="{{ url_for('main.create_group') }}">Groups</a>
+    <a href="{{ url_for('auth.message') }}">Messages</a>
+  </div>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -160,7 +175,5 @@
       </div>
     </form>
   </div>
-
-  <a href="{{ url_for('main.dashboard') }}">← Back to Dashboard</a>
 </body>
 </html>
