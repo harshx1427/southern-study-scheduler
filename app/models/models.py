@@ -14,7 +14,20 @@ class User(UserMixin, db.Model):
     # relationships
     groups       = db.relationship("StudyGroup", backref="creator", lazy=True)
     memberships  = db.relationship("Membership", backref="user", lazy=True)
-    
+
+    sent_messages = db.relationship(
+        "Message",
+        foreign_keys='Message.sender_id',
+        backref="sender_user",  # change this to avoid conflict
+        lazy=True
+    )
+
+    received_messages = db.relationship(
+        "Message",
+        foreign_keys='Message.receiver_id',
+        backref="receiver_user",  # and this too
+        lazy=True
+    )
 
 
 class StudyGroup(db.Model):
@@ -44,41 +57,28 @@ class Forum(db.Model):
     created_at       = db.Column(db.DateTime, default=datetime.utcnow)
 
     # relationships
-    messages = db.relationship("ThreadMessage", backref="thread", lazy=True, cascade="all, delete-orphan")
-    creator = db.relationship("User", backref=db.backref("threads_created", lazy=True), foreign_keys = [created_by_id])
+    #messages = db.relationship("Message", backref="forum", lazy=True)
 
 class ThreadMessage(db.Model):
     __tablename__ = "thread_messages"
 
-    id         = db.Column(db.Integer, primary_key=True)
-    thread_id   = db.Column(db.Integer, db.ForeignKey("forums.id"), nullable=False)
-    author_id    = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    content    = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    posted_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_read = db.Column(db.Boolean, default=False)
 
-    # relationships
-    author = db.relationship(
-    "User",
-    foreign_keys=[author_id],
-    backref=db.backref("thread_messages", lazy=True, cascade="all, delete-orphan")
-)
-
-
-
-'''class Message(db.Model):
-    __tablename__ = "messages"
-
-    message_id       = db.Column(db.Integer, primary_key=True)
-    sender_user_id   = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    receiver_user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    listing_id       = db.Column(db.Integer, db.ForeignKey("study_groups.id"), nullable=False)
-    content          = db.Column(db.Text, nullable=False)
-    sent_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    # relationships
-    sender   = db.relationship("User", foreign_keys=[sender_user_id], backref="sent_messages")
-    receiver = db.relationship("User", foreign_keys=[receiver_user_id], backref="received_messages")
-    listing = db.relationship("StudyGroup", backref="messages")'''
+    sender = db.relationship(
+        "User",
+        foreign_keys=[sender_id],
+        overlaps="sender_user,sent_messages"
+    )
+    receiver = db.relationship(
+        "User",
+        foreign_keys=[receiver_id],
+        overlaps="receiver_user,received_messages"
+    )
 
 class Membership(db.Model):
     __tablename__ = "memberships"

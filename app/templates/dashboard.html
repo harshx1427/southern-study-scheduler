@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+
 </head>
 <body class="dashboard">
   {% with messages = get_flashed_messages(with_categories=true) %}
@@ -18,10 +18,22 @@
       </ul>
     {% endif %}
   {% endwith %}
-  <nav>
-    <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
-    <a href="{{ url_for('auth.logout') }}">Logout</a>
-  </nav>
+
+  <div class="menu">
+
+    <a href="{{ url_for('main.dashboard') }}"> Home </a>
+    <a href="{{ url_for('main.create_group') }}"> Groups </a>
+    <a href=""> Listing </a>
+    <a href="{{ url_for('auth.message') }}">
+      Messages
+      {% if unread_count > 0 %}
+        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+      {% endif %}
+    </a>
+
+  </div>
+
+
   <h1>Welcome {{ current_user.name }}!</h1>
   <header>
 

@@ -4,7 +4,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, DateTimeField
 from wtforms.validators import DataRequired, Length
 from app import db
-from app.models.models import StudyGroup, Membership
+from app.models.models import StudyGroup, Membership, Message, User
+
 
 class StudyGroupForm(FlaskForm):
     subject = StringField('Course/Subject', validators=[DataRequired(),Length(max=50)])
@@ -26,6 +27,9 @@ def index():
 def dashboard():
     q = request.args.get('q', '').strip()
 
+    # Count unread messages for the logged-in user
+    unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
+
     if q:
         groups = StudyGroup.query.filter(
             StudyGroup.name.ilike(f'%{q}%')
@@ -37,7 +41,14 @@ def dashboard():
     member_records = Membership.query.filter_by(user_id=current_user.id).all()
     member_group_ids = {m.study_group_id for m in member_records}
 
-    return render_template('dashboard.html', name=current_user.name, groups=groups, q=q, member_group_ids=member_group_ids)
+    return render_template(
+        'dashboard.html',
+        name=current_user.name,
+        groups=groups,
+        q=q,
+        member_group_ids=member_group_ids,
+        unread_count=unread_count  # pass this to template
+    )
 
 # New route to create a study group
 
@@ -45,6 +56,7 @@ def dashboard():
 @login_required
 def create_group():
     form = StudyGroupForm()
+    unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
     if form.validate_on_submit():
         group = StudyGroup(
             subject = form.subject.data,
@@ -62,7 +74,7 @@ def create_group():
             role='creator')
         flash('Study group created successfully!', 'group_success')
         return redirect(url_for('main.dashboard'))
-    return render_template('create_group.html', form=form)
+    return render_template('create_group.html', form=form, unread_count=unread_count)
 
 @main_bp.route('/groups/<int:group_id>')
 @login_required
