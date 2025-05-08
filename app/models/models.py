@@ -45,7 +45,7 @@ class Forum(db.Model):
 
     # relationships
     messages = db.relationship("ThreadMessage", backref="thread", lazy=True, cascade="all, delete-orphan")
-    creator = db.relationship("User", backref="forums", foreign_keys=[created_by_id])
+    creator = db.relationship("User", backref=db.backref("threads_created", lazy=True), foreign_keys = [created_by_id])
 
 class ThreadMessage(db.Model):
     __tablename__ = "thread_messages"
@@ -57,7 +57,12 @@ class ThreadMessage(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # relationships
-    author = db.relationship("User", backref="thread_messages")
+    author = db.relationship(
+    "User",
+    foreign_keys=[author_id],
+    backref=db.backref("thread_messages", lazy=True, cascade="all, delete-orphan")
+)
+
 
 
 '''class Message(db.Model):

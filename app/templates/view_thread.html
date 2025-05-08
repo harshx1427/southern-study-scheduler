@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ thread.title }}{% endblock %}
+{% block content %}
+  <a href="{{ url_for('main.view_group', group_id=group.id) }}">← Back to Group</a>
+  <h2>{{ thread.title }}</h2>
+
+  {% if thread.created_by_id == current_user.id %}
+    <form method="POST"
+          action="{{ url_for('threads.delete_thread',
+                               group_id=group.id,
+                               thread_id=thread.id) }}"
+          onsubmit="return confirm('Delete this thread and its messages?');"
+          style="display:inline-block; margin-bottom:1em;">
+      <button class="btn btn-danger">Delete Thread</button>
+    </form>
+  {% endif %}
+
+  <ul>
+    {% for m in messages %}
+      <li>
+        <strong>{{ m.author.name }}</strong>
+        ({{ m.created_at.strftime('%Y-%m-%d %H:%M') }}):
+        {{ m.content }}
+      </li>
+    {% else %}
+      <li>No messages yet.</li>
+    {% endfor %}
+  </ul>
+
+  <form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.content.label }}<br>{{ form.content(rows=4) }}<br><br>
+    {{ form.submit() }}
+  </form>
+{% endblock %}
+
