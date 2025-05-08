@@ -3,26 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Message</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='home_styles.css') }}">
 </head>
 <body>
+  <div class="menu">
+
+        <a href="{{ url_for('main.dashboard') }}"> Home </a>
+        <a href="#"> Listings </a>
+        <a href="{{ url_for('main.create_group') }}"> Groups </a>
+        <a href="{{ url_for('auth.message') }}"> Messages </a>
+
+  </div>
+
   <h1>Message Board</h1>
 
   <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.content.label }}<br>
-    {{ form.content(rows=4, cols=60) }}<br>
-    {{ form.submit() }}
+    <p>{{ form.recipient_id.label }} {{ form.recipient_id() }}</p>
+    <p>{{ form.content.label }}<br>{{ form.content(rows=4) }}</p>
+    <p>{{ form.submit() }}</p>
   </form>
 
   <hr>
 
+  <h3>Messages you received:</h3>
   <ul>
-    {% for msg in messages %}
-      <li><strong>{{ msg.author.name }}</strong> ({{ msg.posted_at.strftime('%Y-%m-%d %H:%M') }}): {{ msg.content }}</li>
-    {% else %}
-      <li>No messages yet.</li>
+    {% for message in messages %}
+      <li>
+        From: {{ message.sender_user.name }}<br>
+        {{ message.content }}<br>
+        <small>{{ message.posted_at }}</small>
+      </li>
     {% endfor %}
   </ul>
+
 
 </body>
 </html>

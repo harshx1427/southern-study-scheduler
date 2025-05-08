@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Create Study Group</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='home_styles.css') }}">
 </head>
 <body>
   <header>
@@ -21,6 +21,14 @@
       </ul>
     {% endif %}
   {% endwith %}
+  <div class="menu">
+
+        <a href="{{ url_for('main.dashboard') }}"> Home </a>
+        <a href="#"> Listings </a>
+        <a href="{{ url_for('main.create_group') }}"> Groups </a>
+        <a href="{{ url_for('auth.message') }}"> Messages </a>
+
+  </div>
 
   <!-- 1) Make sure action points at the route, method is POST -->
   <form method="POST" action="{{ url_for('main.create_group') }}">
@@ -78,7 +86,7 @@
     </div>
   </form>
 
-  <p><a href="{{ url_for('main.dashboard') }}">← Back to Dashboard</a></p>
+  <p><a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a></p>
 </body>
 </html>
 

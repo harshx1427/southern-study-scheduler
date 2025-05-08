@@ -14,7 +14,20 @@ class User(UserMixin, db.Model):
     # relationships
     groups       = db.relationship("StudyGroup", backref="creator", lazy=True)
     memberships  = db.relationship("Membership", backref="user", lazy=True)
-    messages     = db.relationship("Message", backref="author", lazy=True)
+
+    sent_messages = db.relationship(
+        "Message",
+        foreign_keys='Message.sender_id',
+        backref="sender_user",  # change this to avoid conflict
+        lazy=True
+    )
+
+    received_messages = db.relationship(
+        "Message",
+        foreign_keys='Message.receiver_id',
+        backref="receiver_user",  # and this too
+        lazy=True
+    )
 
 
 class StudyGroup(db.Model):
@@ -43,17 +56,17 @@ class Forum(db.Model):
     created_at       = db.Column(db.DateTime, default=datetime.utcnow)
 
     # relationships
-    messages = db.relationship("Message", backref="forum", lazy=True)
+    #messages = db.relationship("Message", backref="forum", lazy=True)
 
 
 class Message(db.Model):
     __tablename__ = "messages"
 
-    id         = db.Column(db.Integer, primary_key=True)
-    forum_id   = db.Column(db.Integer, db.ForeignKey("forums.id"), nullable=False)
-    author_id  = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    content    = db.Column(db.Text, nullable=False)
-    posted_at  = db.Column(db.DateTime, default=datetime.utcnow)
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    posted_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class Membership(db.Model):

@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import DevelopmentConfig
 
-
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -34,6 +33,6 @@ def create_app(config_object=DevelopmentConfig):
         return redirect(url_for(auth.login))
 
     with app.app_context():
-        db.create_all()
+        db.create_all()'''
 
-    return app'''
+    return app
