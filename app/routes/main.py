@@ -85,8 +85,12 @@ def view_group(group_id):
         study_group_id=group.id
     ).first()
     is_member = membership is not None
+
+    unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
     
-    return render_template('view_group.html', group=group, is_member=is_member)
+    return render_template('view_group.html',
+                           group=group, is_member=is_member,
+                           unread_count=unread_count)
 
 
 # Route to join a study group
@@ -106,6 +110,7 @@ def join_group(group_id):
         db.session.rollback()
         flash('Could not join (already a member?)', 'warning')
     return redirect(url_for('main.dashboard'))
+
 
 
 # Route to leave a study group
