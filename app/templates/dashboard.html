@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -141,7 +141,7 @@
     <button type="submit">Search</button>
   </form>
 
-  <!-- List of groups -->
+   <h2> list of groups</h2>
   <div class="group-container">
     <ul class="group-list">
 
@@ -154,7 +154,7 @@
       </h3>
         <p>{{ group.description }}</p>
 
-        <!-- Join/Leave-->
+        <h2> Join/Leave </h2>
         {% if group.id in member_group_ids %}
           <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
             <button type="submit" class="btn">Leave Group</button>
@@ -173,3 +173,6 @@
 
 </body>
 </html>
+
+  
+  

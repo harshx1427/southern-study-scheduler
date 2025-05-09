@@ -1,10 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, abort, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, DateTimeField
 from wtforms.validators import DataRequired, Length
 from app import db
-from app.models.models import StudyGroup, Membership, Message, User
+from app.models.models import StudyGroup, Membership, Message, User, Forum, ThreadMessage
 
 
 class StudyGroupForm(FlaskForm):
@@ -68,6 +68,10 @@ def create_group():
         )
         db.session.add(group)
         db.session.commit()
+        creator_membership = Membership(
+            user_id=current_user.id,
+            study_group_id=group.id,
+            role='creator')
         flash('Study group created successfully!', 'group_success')
         return redirect(url_for('main.dashboard'))
     return render_template('create_group.html', form=form, unread_count=unread_count)
@@ -130,3 +134,15 @@ def leave_group(group_id):
 def profile():
     unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
     return render_template('profile.html', unread_count=unread_count)
+
+
+@main_bp.route('/groups/<int:group_id>/delete', methods=['POST'])
+@login_required
+def delete_group(group_id):
+    group = StudyGroup.query.get_or_404(group_id)
+    if group.created_by_id != current_user.id:
+        abort(403)
+    db.session.delete(group)
+    db.session.commit()
+    flash('Study group deleted.', 'success')
+    return redirect(url_for('main.dashboard'))
