@@ -151,7 +151,7 @@
   <ul>
     {% for msg in messages %}
       <li>
-        To {{ msg.receiver.name }}: {{ msg.content }} <em>({{ msg.posted_at }})</em>
+        To {{ msg.receiver.name }}: {{ msg.content }} <em>({{ msg.posted_at.strftime('%Y-%m-%d %H:%M') }})</em>
       </li>
     {% endfor %}
   </ul>
