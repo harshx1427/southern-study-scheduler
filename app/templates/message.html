@@ -90,10 +90,10 @@
   {% endif %}
 
   <div class="menu">
-    <a href="{{ url_for('main.dashboard') }}"><button><button>Home</button></button></a>
-    <a href="{{ url_for('main.create_group') }}"><button><button>Groups</button></button></a>
-    <a href=""><button><button>Listing</button></button></a>
-    <a href="{{ url_for('auth.message') }}"><button><button>
+    <a href="{{ url_for('main.dashboard') }}"><button>Home</button></a>
+    <a href="{{ url_for('main.create_group') }}"><button>Groups</button></a>
+    <a href=""><button>Listing</button></a>
+    <a href="{{ url_for('auth.message') }}"><button>
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
