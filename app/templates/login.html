@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+ </head>
+ <body>
+   {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          {% if category == 'success_create', 'danger' %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+    <h1> SCSU Study Group Finder </h1>
+    <!--user is logging into their account -->
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.southern_email.label }} {{ form.southern_email() }}<br>
+    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.submit() }} <br> <br>
+    </form>
+    <a href="{{ url_for('auth.register') }}"><button type="button" id="accountButton">Create an Account</button></a>
+    <br>
+    <a href="{{ url_for('main.index') }}"><button>← Back to Main</button></a>
+
+
+ <!--   <script>
+        function accountButton() {
+            document.getElementById("accountButton").onclick = function() {
+                window.location.href = "/register";
+            };
+        }
+    </script>
+-->
+ </body>
+</html> 
