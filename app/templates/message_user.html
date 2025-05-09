@@ -48,61 +48,96 @@
       width: 100%;
       }
 
-  .user-info {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #333;
-  }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #333;
+    }
 
-  .user-info:hover {
-    color: #007bff;
-  }
+    .user-info:hover {
+      color: #007bff;
+    }
 
-  .user-avatar {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 28px;
-    font-size: 14px;
-    font-weight: bold;
-  }
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .user-area {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: #f3f3f3;
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .logout-button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    .logout-button:hover {
+      background-color: #c82333;
+      text-decoration: none;
+    }
+
   </style>
 
 </head>
 
 <body>
   {% if current_user.is_authenticated %}
-    <a href="{{ url_for('main.profile') }}" class="user-info" style="text-decoration: none;">
-      <div class="user-avatar">
-        {{ current_user.name[0]|upper }}
-      </div>
-      <span>{{ current_user.name }}</span>
-    </a>
+    <div class="user-area">
+      <a href="{{ url_for('main.profile') }}" class="user-info">
+        <div class="user-avatar">
+          {{ current_user.name[0]|upper }}
+        </div>
+        <span>{{ current_user.name }}</span>
+      </a>
+      <form method="GET" action="{{ url_for('auth.logout') }}">
+        <button class="logout-button" type="submit">Log Out</button>
+      </form>
+    </div>
   {% endif %}
 
 
   <div class="menu">
 
     <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
     <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
-    <a href=""><button> Listing </button></a>
-    <a href="{{ url_for('auth.message') }}"><button> Messages </button></a>
-    <a href="{{ url_for('auth.logout') }}" class="logout"><button> Log Out </button></a>
+    <a href="{{ url_for('auth.message') }}"><button>
+      Messages
+      {% if unread_count > 0 %}
+        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+      {% endif %}
+    </button></a>
 
   </div>
 
   <div class="chat-container">
-    <a href="{{ url_for('auth.message') }}">← Back to Message</a>
+
 
     <h1>Send Message to {{ recipient.name }}</h1>
 
@@ -139,6 +174,8 @@
       {{ form.submit() }}
     </form>
   </div>
+
+  <a href="{{ url_for('auth.message') }}"><button>← Back to Message</button></a>
 
   <script>
     const chatBox = document.querySelector('.chat-box');

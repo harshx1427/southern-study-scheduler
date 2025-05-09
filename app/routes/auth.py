@@ -186,6 +186,9 @@ def message_user(user_id):
     ).update({'is_read': True})
     db.session.commit()
 
+    # ✅ Always compute this before rendering template
+    unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
+
     if form.validate_on_submit():
         msg = Message(
             sender_id=current_user.id,
@@ -201,12 +204,12 @@ def message_user(user_id):
     messages = Message.query.filter(
         ((Message.sender_id == current_user.id) & (Message.receiver_id == recipient.id)) |
         ((Message.sender_id == recipient.id) & (Message.receiver_id == current_user.id))
-    ).order_by(Message.posted_at.asc()).all()  # 🔁 change .desc() to .asc()
+    ).order_by(Message.posted_at.asc()).all()
 
     return render_template(
         'message_user.html',
         form=form,
         recipient=recipient,
-        messages=messages
-        # ✅ (do NOT pass unread_count here unless the template needs it)
+        messages=messages,
+        unread_count=unread_count
     )

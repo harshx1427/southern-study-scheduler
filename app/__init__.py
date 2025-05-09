@@ -25,4 +25,14 @@ def create_app(config_object=DevelopmentConfig):
     from app.routes.main import main_bp
     app.register_blueprint(main_bp)
 
+    from app.routes.threads import threads_bp
+    app.register_blueprint(threads_bp)
+
+    @app.route('/')
+    def root():
+        return redirect(url_for('auth.login'))
+    
+    with app.app_context():
+        db.create_all()
+
     return app
