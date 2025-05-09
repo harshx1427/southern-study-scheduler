@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, abort
 from flask_login import login_required, current_user
 from app import db
-from app.models.models import StudyGroup, Forum, ThreadMessage, Membership
+from app.models.models import StudyGroup, Forum, ThreadMessage, Membership, User
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length
@@ -28,7 +28,7 @@ def new_thread(group_id):
         abort(403)
     form = NewThreadForm()
     if form.validate_on_submit():
-        thread = Forum(study_group_id=group.id, title=form.title.data)
+        thread = Forum(study_group_id=group.id, title=form.title.data, created_by_id=current_user.id)
         db.session.add(thread)
         db.session.commit()
         msg = ThreadMessage(thread_id=thread.id, author_id=current_user.id, content=form.content.data)

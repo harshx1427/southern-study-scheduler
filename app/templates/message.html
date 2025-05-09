@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Message</title>
+  <style>
+    .notif-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: red;
+      border-radius: 50%;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .user-info {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-weight: bold;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #333;
+    }
+    .user-info:hover {
+      color: #007bff;
+    }
+    .user-avatar {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  {% if current_user.is_authenticated %}
+    <a href="{{ url_for('main.dashboard') }}" class="user-info" style="text-decoration: none;">
+      <div class="user-avatar">
+        {{ current_user.name[0]|upper }}
+      </div>
+      <span>{{ current_user.name }}</span>
+    </a>
+  {% endif %}
+
+  <div class="menu">
+    <a href="{{ url_for('main.dashboard') }}"><button>Home</button></a>
+    <a href="{{ url_for('main.create_group') }}"><button>Groups</button></a>
+    <a href=""><button>Listing</button></a>
+    <a href="{{ url_for('auth.message') }}"><button>
+      Messages
+      {% if unread_count > 0 %}
+        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+      {% endif %}
+    </button></a>
+    <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
+  </div>
+
+  <h1>Message Board</h1>
+
+  <h3>Recent Conversations</h3>
+  <ul>
+    {% for user, unread in recent_contacts %}
+      <li>
+        <a href="{{ url_for('auth.message_user', user_id=user.id) }}"><button>
+          {{ user.name }}
+          {% if unread > 0 %}
+            <span class="notif-dot"></span>
+          {% endif %}
+        </button></a>
+      </li>
+    {% else %}
+      <li>No recent conversations</li>
+    {% endfor %}
+  </ul>
+
+  <form method="GET" action="{{ url_for('auth.message') }}">
+    <input
+      type="text"
+      id="user-search"
+      placeholder="Search users..."
+      autocomplete="off">
+    <div id="suggestions" style="border: 1px solid #ccc; display: none;"></div>
+    <button type="submit">Search</button>
+  </form>
+
+  {% if search_results %}
+    <h3>Search Results</h3>
+    {% for user in search_results %}
+      <div>
+        <strong>{{ user.name }}</strong> ({{ user.southern_email }})
+        <form method="POST" action="{{ url_for('auth.message') }}">
+          {{ form.hidden_tag() }}
+          <input type="hidden" name="recipient_id" value="{{ user.id }}">
+          {{ form.content.label }}
+          {{ form.content(rows=2, cols=40) }}
+          {{ form.submit(value='Send Message') }}
+        </form>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <hr>
+
+  <h3>Your Sent Messages</h3>
+  <ul>
+    {% for msg in messages %}
+      <li>
+        To {{ msg.receiver.name }}: {{ msg.content }} <em>({{ msg.posted_at }})</em>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <script>
+    const input = document.getElementById("user-search");
+    const suggestionsBox = document.getElementById("suggestions");
+    input.addEventListener("input", async () => {
+      const query = input.value.trim();
+      if (query.length < 2) {
+        suggestionsBox.style.display = "none";
+        return;
+      }
+      const res = await fetch(`/api/user_suggestions?q=${query}`);
+      const users = await res.json();
+      if (users.length === 0) {
+        suggestionsBox.innerHTML = "<p>No matches</p>";
+        suggestionsBox.style.display = "block";
+        return;
+      }
+      suggestionsBox.innerHTML = "";
+      users.forEach(user => {
+        const div = document.createElement("div");
+        div.innerHTML = `${user.name} (${user.email})`;
+        div.style.cursor = "pointer";
+        div.onclick = () => {
+          window.location.href = `/message/${user.id}`;
+        };
+        suggestionsBox.appendChild(div);
+      });
+      suggestionsBox.style.display = "block";
+    });
+  </script>
+</body>
+</html>

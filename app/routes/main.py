@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, DateTimeField
 from wtforms.validators import DataRequired, Length
 from app import db
-from app.models.models import StudyGroup, Membership, Message, User
+from app.models.models import StudyGroup, Membership, Message, User, Forum, ThreadMessage
 
 
 class StudyGroupForm(FlaskForm):
