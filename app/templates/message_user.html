@@ -3,50 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <title>Send Message</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .menu {
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .chat-container {
+      width: 90%;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .chat-box {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #f9f9f9;
+    }
+
+    .chat-box ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .chat-box li {
+      margin-bottom: 10px;
+    }
+
+    form textarea {
+      width: 100%;
+      }
+
+  .user-info {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+  }
+
+  .user-info:hover {
+    color: #007bff;
+  }
+
+  .user-avatar {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  </style>
 
 </head>
+
 <body>
+  {% if current_user.is_authenticated %}
+    <a href="{{ url_for('main.profile') }}" class="user-info" style="text-decoration: none;">
+      <div class="user-avatar">
+        {{ current_user.name[0]|upper }}
+      </div>
+      <span>{{ current_user.name }}</span>
+    </a>
+  {% endif %}
+
+
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"> Home </a>
-    <a href="{{ url_for('main.create_group') }}"> Groups </a>
-    <a href=""> Listing </a>
-    <a href="{{ url_for('auth.message') }}">Messages</a>
-    <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
+    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
+    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
+    <a href=""><button> Listing </button></a>
+    <a href="{{ url_for('auth.message') }}"><button> Messages </button></a>
+    <a href="{{ url_for('auth.logout') }}" class="logout"><button> Log Out </button></a>
 
   </div>
 
-  <a href="{{ url_for('auth.message') }}">← Back to Message</a>
+  <div class="chat-container">
+    <a href="{{ url_for('auth.message') }}">← Back to Message</a>
 
-  <h1>Send Message to {{ recipient.name }}</h1>
+    <h1>Send Message to {{ recipient.name }}</h1>
 
-  <form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.content.label }}<br>
-    {{ form.content(rows=4, cols=50) }}<br><br>
-    {{ form.submit() }}
-  </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <ul class="flashes">
-        {% for category, message in messages %}
-          <li class="{{ category }}">{{ message }}</li>
+    <h3>Conversation with {{ recipient.name }}</h3>
+    <div class="chat-box">
+      <ul>
+        {% for m in messages %}
+          <li style="text-align: {% if m.sender_id == current_user.id %}right{% else %}left{% endif %};">
+            <div style="display: inline-block; background-color: {% if m.sender_id == current_user.id %}#d0f0c0{% else %}#f0f0f0{% endif %}; padding: 8px 12px; border-radius: 10px; max-width: 70%;">
+              <strong>{{ 'You' if m.sender_id == current_user.id else m.sender.name }}:</strong><br>
+              {{ m.content }}<br>
+              <em style="font-size: 0.8em; color: #666;">{{ m.posted_at.strftime('%Y-%m-%d %H:%M') }}</em>
+            </div>
+          </li>
         {% endfor %}
       </ul>
-    {% endif %}
-  {% endwith %}
+    </div>
 
-  <h3>Conversation with {{ recipient.name }}</h3>
-  <ul>
-    {% for m in messages %}
-      <li>
-        <strong>{{ 'You' if m.sender_id == current_user.id else m.sender.name }}:</strong>
-        {{ m.content }}
-        <em>({{ m.posted_at.strftime('%Y-%m-%d %H:%M') }})</em>
-      </li>
-    {% endfor %}
-  </ul>
+
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.content.label }}<br>
+      {{ form.content(rows=4) }}<br><br>
+      {{ form.submit() }}
+    </form>
+  </div>
+
+  <script>
+    const chatBox = document.querySelector('.chat-box');
+    chatBox.scrollTop = chatBox.scrollHeight;
+  </script>
 
 </body>
-</html>

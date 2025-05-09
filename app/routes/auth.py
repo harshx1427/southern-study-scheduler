@@ -70,7 +70,7 @@ def register():
             body='Thanks for registering. You can now log in and join study groups!'
         )'''
 
-        flash('Your account has been created! Please log In.', 'success')
+        flash('Your account has been created! Please log In.', 'success_create')
         return redirect(url_for('auth.login'))
 
     return render_template('register.html', form=form)
@@ -80,7 +80,7 @@ def register():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.', 'success')
+    flash('You have been logged out.', 'success_logout')
     return redirect(url_for('main.index'))
 
 
@@ -201,7 +201,7 @@ def message_user(user_id):
     messages = Message.query.filter(
         ((Message.sender_id == current_user.id) & (Message.receiver_id == recipient.id)) |
         ((Message.sender_id == recipient.id) & (Message.receiver_id == current_user.id))
-    ).order_by(Message.posted_at.desc()).all()
+    ).order_by(Message.posted_at.asc()).all()  # 🔁 change .desc() to .asc()
 
     return render_template(
         'message_user.html',
