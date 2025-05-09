@@ -73,6 +73,8 @@ def create_group():
             user_id=current_user.id,
             study_group_id=group.id,
             role='creator')
+        db.session.add(creator_membership)
+        db.session.commit()
         flash('Study group created successfully!', 'group_success')
         return redirect(url_for('main.dashboard'))
     return render_template('create_group.html', form=form, unread_count=unread_count)
