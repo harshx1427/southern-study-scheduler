@@ -119,3 +119,9 @@ def leave_group(group_id):
     else:
         flash('You are not a member of this group', 'warning')
     return redirect(url_for('main.dashboard'))
+
+@main_bp.route('/profile')
+@login_required
+def profile():
+    unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
+    return render_template('profile.html', unread_count=unread_count)
