@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ user.name }}'s Profile{% endblock %}
+{% block content %}
+  <div class="profile-container">
+    <h1>{{ user.name }}'s Profile</h1>
+    <p><strong>Email:</strong> {{ user.southern_email }}</p>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Member Since:</strong> {{ user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+  </div>
+
+  {% if group_id %}
+    <a href="{{ url_for('main.view_group', group_id=group_id) }}">
+      <button>← Back to Group</button>
+    </a>
+  {% else %}
+    <a href="{{ url_for('main.dashboard') }}">
+      <button>← Back to Dashboard</button>
+    </a>
+  {% endif %}
+
+
+{% endblock %}

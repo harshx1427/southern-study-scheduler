@@ -9,5 +9,18 @@
   <h1>Welcome to Study Group Finder<br></h1>
   <p><a href="{{ url_for('auth.login') }}"><button>Log In</button></a>
     or <a href="{{ url_for('auth.register') }}"><button>Register</button></a> to get started.</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          {% if category == 'success_logout' %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
 </body>
 </html>
