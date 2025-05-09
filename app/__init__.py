@@ -14,10 +14,8 @@ def load_user(user_id):
 
 def create_app(config_object=DevelopmentConfig):
     app = Flask(__name__, instance_relative_config=True)
-
     app.config.from_object(config_object)
 
-    #mail.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
 

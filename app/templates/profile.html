@@ -4,6 +4,15 @@
   <title>Profile</title>
 
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
     .menu {
       width: 100%;
       text-align: center;
@@ -38,6 +47,36 @@
       font-size: 14px;
       font-weight: bold;
     }
+
+      .profile-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    font-family: Arial, sans-serif;
+  }
+
+    .profile-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-container p {
+      font-size: 16px;
+      margin: 10px 0;
+      padding-left: 10px;
+      border-left: 3px solid #007bff;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 30px;
+      text-align: center;
+    }
+
   </style>
 
 </head>
@@ -66,10 +105,13 @@
 
   </div>
 
-  <h1>{{ current_user.name }}'s Profile</h1>
-  <p>Email: {{ current_user.southern_email }}</p>
-  <p>Name: {{ current_user.name }}</p>
-  <p>Account create date: {{ current_user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+  <div class="profile-container">
+    <h1>{{ current_user.name }}'s Profile</h1>
+    <p><strong>Email:</strong> {{ current_user.southern_email }}</p>
+    <p><strong>Name:</strong> {{ current_user.name }}</p>
+    <p><strong>Account Created:</strong> {{ current_user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+
+  </div>
 
   <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
 </body>
