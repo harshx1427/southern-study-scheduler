@@ -88,3 +88,38 @@ class Membership(db.Model):
     study_group_id = db.Column(db.Integer, db.ForeignKey("study_groups.id"), nullable=False)
     role           = db.Column(db.String(50), default="member")
     joined_at      = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class ThreadMessage(db.Model):
+    __tablename__ = "thread_messages"
+
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    posted_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_read = db.Column(db.Boolean, default=False)
+
+    sender = db.relationship(
+        "User",
+        foreign_keys=[sender_id],
+        overlaps="sender_user,sent_messages"
+    )
+    receiver = db.relationship(
+        "User",
+        foreign_keys=[receiver_id],
+        overlaps="receiver_user,received_messages"
+    )
+
+class ThreadReply(db.Model):
+    __tablename__ = "thread_replies"
+
+    id = db.Column(db.Integer, primary_key=True)
+    thread_id = db.Column(db.Integer, db.ForeignKey("forums.id"), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    posted_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    author = db.relationship("User", backref="thread_replies")
+    thread = db.relationship("Forum", backref="replies")
+
