@@ -113,14 +113,13 @@
     {% if messages %}
       <ul class="flashes">
         {% for category, message in messages %}
-          {% if category == 'group_success', 'join_success', 'leave_success', 'warming' %}
+          {% if category == 'group_success' or category == 'warning' %}
             <li class="{{ category }}">{{ message }}</li>
           {% endif %}
         {% endfor %}
       </ul>
     {% endif %}
   {% endwith %}
-
 
   {% if current_user.is_authenticated %}
     <div class="user-area">
@@ -161,6 +160,7 @@
   </nav>
 
   </header>
+
   <form method="GET" action="{{ url_for('main.dashboard') }}" class="search-form">
     <input
       type="text"
@@ -184,7 +184,18 @@
       </h3>
         <p>{{ group.description }}</p>
 
-        <h2> Join/Leave </h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          {% set join_cat = 'join_success_' ~ group.id %}
+          {% set leave_cat = 'leave_success_' ~ group.id %}
+          {% if category == join_cat %}
+            <h4 style="color: green;">{{ message }}</h4>
+          {% elif category == leave_cat %}
+            <h4 style="color: red;">{{ message }}</h4>
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+
         {% if group.id in member_group_ids %}
           <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
             <button type="submit" class="btn">Leave Group</button>
