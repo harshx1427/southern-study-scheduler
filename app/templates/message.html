@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <title>Message</title>
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .menu {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
     .notif-dot {
       display: inline-block;
       width: 10px;
@@ -68,6 +83,23 @@
       text-decoration: none;
     }
 
+    .flex-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .flex-box {
+      flex: 1;
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      min-height: 300px;
+    }
+
   </style>
 
 </head>
@@ -103,58 +135,52 @@
 
   <h1>Message Board</h1>
 
-  <h3>Recent Conversations</h3>
-  <ul>
-    {% for user, unread in recent_contacts %}
-      <li>
-        <a href="{{ url_for('auth.message_user', user_id=user.id) }}"><button>
-          {{ user.name }}
-          {% if unread > 0 %}
-            <span class="notif-dot"></span>
-          {% endif %}
-        </button></a>
-      </li>
-    {% else %}
-      <li>No recent conversations</li>
-    {% endfor %}
-  </ul>
+<div class="flex-container">
 
-  <form method="GET" action="{{ url_for('auth.message') }}">
-    <input
-      type="text"
-      id="user-search"
-      placeholder="Search users..."
-      autocomplete="off">
-    <div id="suggestions" style="border: 1px solid #ccc; display: none;"></div>
-    <button type="submit">Search</button>
-  </form>
+  <!-- Left box: Recent Conversations + Search -->
+  <div class="flex-box">
+    <h3>Recent Conversations</h3>
+    <ul>
+      {% for user, unread in recent_contacts %}
+        <li>
+          <a href="{{ url_for('auth.message_user', user_id=user.id) }}"><button>
+            {{ user.name }}
+            {% if unread > 0 %}
+              <span class="notif-dot"></span>
+            {% endif %}
+          </button></a>
+        </li>
+      {% else %}
+        <li>No recent conversations</li>
+      {% endfor %}
+    </ul>
 
-  {% if search_results %}
-    <h3>Search Results</h3>
-    {% for user in search_results %}
-      <div>
-        <strong>{{ user.name }}</strong> ({{ user.southern_email }})
-        <form method="POST" action="{{ url_for('auth.message') }}">
-          {{ form.hidden_tag() }}
-          <input type="hidden" name="recipient_id" value="{{ user.id }}">
-          {{ form.content.label }}
-          {{ form.content(rows=2, cols=40) }}
-          {{ form.submit(value='Send Message') }}
-        </form>
-      </div>
-    {% endfor %}
-  {% endif %}
+    <!-- Search bar goes inside left box -->
+    <form method="GET" action="{{ url_for('auth.message') }}">
+      <input
+        type="text"
+        id="user-search"
+        placeholder="Search users..."
+        autocomplete="off">
+      <div id="suggestions" style="border: 1px solid #ccc; display: none;"></div>
+      <button type="submit">Search</button>
+    </form>
 
-  <hr>
+  </div>
 
-  <h3>Your Sent Messages</h3>
-  <ul>
-    {% for msg in messages %}
-      <li>
-        To {{ msg.receiver.name }}: {{ msg.content }} <em>({{ msg.posted_at.strftime('%Y-%m-%d %H:%M') }})</em>
-      </li>
-    {% endfor %}
-  </ul>
+  <!-- Right box: Sent messages -->
+  <div class="flex-box">
+    <h3>Your Sent Messages</h3>
+    <ul>
+      {% for msg in messages %}
+        <li>
+          To {{ msg.receiver.name }}: {{ msg.content }} <em>({{ msg.posted_at.strftime('%Y-%m-%d %H:%M') }})</em>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
 
   <script>
     const input = document.getElementById("user-search");

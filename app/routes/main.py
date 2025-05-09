@@ -5,11 +5,12 @@ from wtforms import StringField, TextAreaField, SubmitField, DateTimeField
 from wtforms.validators import DataRequired, Length
 from app import db
 from app.models.models import StudyGroup, Membership, Message, User, Forum, ThreadMessage
+from wtforms.fields import DateTimeLocalField
 
 
 class StudyGroupForm(FlaskForm):
     subject = StringField('Course/Subject', validators=[DataRequired(),Length(max=50)])
-    meet_time = DateTimeField('Meeting Date & Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    meet_time = DateTimeLocalField('Meeting Date & Time', format='%Y-%m-%dT%H:%M', validators=[DataRequired()])
     location = StringField('Location or Link', validators=[DataRequired(), Length(max=200)])
     name = StringField('Group Name', validators=[DataRequired(), Length(max=100)])
     description = TextAreaField('Description', validators=[DataRequired(), Length(max=500)])
@@ -105,18 +106,16 @@ def join_group(group_id):
     db.session.add(new_membership)
     try:
         db.session.commit()
-        flash(f'You joined"{group.name}"', 'join_success')
+        flash(f'You joined "{group.name}"', f'join_success_{group.id}')
     except:
         db.session.rollback()
         flash('Could not join (already a member?)', 'warning')
     return redirect(url_for('main.dashboard'))
 
-
-
-# Route to leave a study group
 @main_bp.route('/groups/<int:group_id>/leave', methods=['POST'])
 @login_required
 def leave_group(group_id):
+    group = StudyGroup.query.get_or_404(group_id)  # <-- add this
     membership = Membership.query.filter_by(
         user_id=current_user.id,
         study_group_id=group_id
@@ -124,10 +123,11 @@ def leave_group(group_id):
     if membership:
         db.session.delete(membership)
         db.session.commit()
-        flash('You left the group', 'leave_success')
+        flash(f'You left "{group.name}"', f'leave_success_{group.id}')
     else:
         flash('You are not a member of this group', 'warning')
     return redirect(url_for('main.dashboard'))
+
 
 @main_bp.route('/profile')
 @login_required
