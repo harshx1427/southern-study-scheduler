@@ -5,7 +5,25 @@
   <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
 
   <div class="layout">
-    <!-- Main details + posts -->
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Group Info</h3>
+      <p><strong>Host:</strong> <a href="{{ url_for('main.profile_view', user_id=group.creator.id, group_id=group.id) }}">{{ group.creator.name }}</a></p>
+
+      <p><strong>Members:</strong> {{ group.memberships|length }}</p>
+
+      <h4>Member List</h4>
+      <ul style="list-style: none; padding-left: 0; margin: 0;">
+        {% for m in group.memberships %}
+          {% if m.user.id != group.creator.id %}
+            <li>– <a href="{{ url_for('main.profile_view', user_id=m.user.id, group_id=group.id) }}">
+              {{ m.user.name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <!-- Main content -->
     <div class="main-content">
       <h2>{{ group.name }}</h2>
       <p><strong>Subject:</strong> {{ group.subject }}</p>
