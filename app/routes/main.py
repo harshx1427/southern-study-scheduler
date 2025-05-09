@@ -137,6 +137,19 @@ def profile():
     unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
     return render_template('profile.html', unread_count=unread_count)
 
+@main_bp.route('/profile/<int:user_id>')
+@login_required
+def profile_view(user_id):
+    user = User.query.get_or_404(user_id)
+    group_id = request.args.get("group_id")  # Get optional group ID
+    unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
+    return render_template(
+        'profile_view.html',
+        user=user,
+        group_id=group_id,
+        unread_count=unread_count
+    )
+
 
 @main_bp.route('/groups/<int:group_id>/delete', methods=['POST'])
 @login_required

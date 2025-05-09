@@ -82,3 +82,27 @@ body {
   background-color: #c82333;
   text-decoration: none;
 }
+
+.profile-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  font-family: Arial, sans-serif;
+}
+
+.profile-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-container p {
+  font-size: 16px;
+  margin: 10px 0;
+  padding-left: 10px;
+  border-left: 3px solid #007bff;
+}
+
