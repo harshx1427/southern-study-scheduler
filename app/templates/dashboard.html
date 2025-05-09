@@ -1,11 +1,113 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .menu {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .group-container {
+      width: 90%;
+      max-width: 700px;
+      text-align: left;
+    }
+
+    .group-list {
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      list-style-type: none;
+    }
+
+    .group-item {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .search-form {
+      margin-bottom: 15px;
+    }
+
+    .btn button {
+      padding: 6px 12px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .user-info:hover {
+      color: #007bff;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .user-area {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: #f3f3f3;
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .logout-button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    .logout-button:hover {
+      background-color: #c82333;
+      text-decoration: none;
+    }
+
+  </style>
+
+
 </head>
+
 <body class="dashboard">
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -19,12 +121,43 @@
     {% endif %}
   {% endwith %}
 
+
+  {% if current_user.is_authenticated %}
+    <div class="user-area">
+      <a href="{{ url_for('main.profile') }}" class="user-info">
+        <div class="user-avatar">
+          {{ current_user.name[0]|upper }}
+        </div>
+        <span>{{ current_user.name }}</span>
+      </a>
+      <form method="GET" action="{{ url_for('auth.logout') }}">
+        <button class="logout-button" type="submit">Log Out</button>
+      </form>
+    </div>
+  {% endif %}
+
+
+  <div class="menu">
+
+    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
+    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><button>
+      Messages
+      {% if unread_count > 0 %}
+        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+      {% endif %}
+    </button></a>
+
+  </div>
+
+
   <h1>Welcome {{ current_user.name }}!</h1>
   <header>
 
   <nav class="navbar">
     <a href="{{ url_for('main.create_group') }}" class="btn"><button> Create a Study Group</button></a>
-    <a href="{{ url_for('auth.logout') }}" class="logout"><button>Log Out</button></a>
+
   </nav>
 
   </header>
@@ -38,8 +171,10 @@
     <button type="submit">Search</button>
   </form>
 
-  <!-- List of groups -->
-  <ul class="group-list">
+   <h2> list of groups</h2>
+  <div class="group-container">
+    <ul class="group-list">
+
     {% for group in groups %}
       <li class="group-item">
         <h3>
@@ -49,8 +184,8 @@
       </h3>
         <p>{{ group.description }}</p>
 
-        <!-- Join/Leave-->
-         {% if group.id in member_group_ids %}
+        <h2> Join/Leave </h2>
+        {% if group.id in member_group_ids %}
           <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
             <button type="submit" class="btn">Leave Group</button>
           </form>
@@ -63,8 +198,11 @@
     {% else %}
       <li>No groups found.</li>
     {% endfor %}
-  </ul>
-
+    </ul>
+  </div>
 
 </body>
 </html>
+
+  
+  
