@@ -1,11 +1,11 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #73b2f1;
+  background-color: #73b2f1;
   margin: 0;
   padding: 0;
    background-size: cover;
-  background-image: URL('scsu_campus.jpeg');
-  animation: fadein 2s;;
+  background-image: URL('scsu.svg');
+  animation: fadein 2s;
 }
 
 @keyframes fadein {
@@ -13,16 +13,12 @@ body {
     to {opacity: 2;}
 }
 
-h1{
-  text-align: center;
-  margin-top: -400px;
-  margin-left: 150px;
-}
+
 form{
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
 }
-.login{
+.register{
   position: fixed;
     width: 520px;
     height: 350px;
@@ -30,6 +26,10 @@ form{
     background-color: #fff;
     border: 5px solid gray;
     margin-left: 700px;
-    margin-top: 650px;
+    margin-top: 300px;
     box-shadow: #111 0px 5px 10px;
+}
+
+.items{
+  align-items: center;
 }

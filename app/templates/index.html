@@ -3,12 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Study Group Finder</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='home_styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
 </head>
 <body>
-  <h1>Welcome to Study Group Finder<br></h1>
-  <p><a href="{{ url_for('auth.login') }}"><button>Log In</button></a>
-    or <a href="{{ url_for('auth.register') }}"><button>Register</button></a> to get started.</p>
+  <div class="home"> <h3>Welcome to Study Group Finder</h3>
+<div class="container">
+  <a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-primary btn-lg mx-auto" width="10px">Log In</button></a></div>
+    <div class="container mx-auto">
+    or 
+    </div>
+    <div class="container mx-auto">
+            <a href="{{ url_for('auth.register') }}">
+              <div class="d-grid">
+                <button type="button" class="btn btn-primary btn-block mx-auto">Register to get started</button></a>
+    </div>
+  </div>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -21,6 +32,6 @@
       </ul>
     {% endif %}
   {% endwith %}
-
+</div>
 </body>
 </html>

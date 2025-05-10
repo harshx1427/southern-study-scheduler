@@ -3,21 +3,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Login </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
- </head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}"> 
+    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+</head>
  <body>
     <!--user is logging into their account -->
-    <div class="login">
+    
+        <div class="login justify-content-center">
     <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.southern_email.label }} {{ form.southern_email() }}<br>
+    {{ form.southern_email.label }} {{ form.southern_email() }}
+    <br>  
     {{ form.password.label }} {{ form.password() }}<br>
-    {{ form.submit() }} <br> <br>
+      <button type="submit" class="btn btn-primary">Login</button>
+    <br> <br>
     </form>
-    <a href="{{ url_for('auth.register') }}"><button type="button" id="accountButton"> New User? Create an Account</button></a>
+        <a href="{{ url_for('auth.register') }}"><type="button" class="btn btn-primary" id="accountButton"> New User? Create an Account</button></a>
     </div>
     <br>
-    <a href="{{ url_for('main.index') }}"><button>← Back to Main</button></a>
+</div>
+    <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
 
    {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
