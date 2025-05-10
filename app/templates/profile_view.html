@@ -1,22 +1,45 @@
 {% extends "base.html" %}
+
 {% block title %}{{ user.name }}'s Profile{% endblock %}
+
 {% block content %}
-  <div class="profile-container">
-    <h1>{{ user.name }}'s Profile</h1>
-    <p><strong>Email:</strong> {{ user.southern_email }}</p>
-    <p><strong>Name:</strong> {{ user.name }}</p>
-    <p><strong>Member Since:</strong> {{ user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+  <div class="profile-container" style="
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  ">
+    <h1 style="text-align: center; margin-bottom: 25px;">{{ user.name }}'s Profile</h1>
+    <p style="font-size: 16px; margin-bottom: 15px;"><strong>Email:</strong> {{ user.southern_email }}</p>
+    <p style="font-size: 16px; margin-bottom: 15px;"><strong>Name:</strong> {{ user.name }}</p>
+    <p style="font-size: 16px; margin-bottom: 15px;"><strong>Member Since:</strong> {{ user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
   </div>
 
-  {% if group_id %}
-    <a href="{{ url_for('main.view_group', group_id=group_id) }}">
-      <button>← Back to Group</button>
-    </a>
-  {% else %}
-    <a href="{{ url_for('main.dashboard') }}">
-      <button>← Back to Dashboard</button>
-    </a>
-  {% endif %}
-
-
+  <div style="text-align: center; margin-top: 30px;">
+    {% if group_id %}
+      <a href="{{ url_for('main.view_group', group_id=group_id) }}">
+        <button style="
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+        ">← Back to Group</button>
+      </a>
+    {% else %}
+      <a href="{{ url_for('main.dashboard') }}">
+        <button style="
+          padding: 10px 20px;
+          background-color: #6c757d;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+        ">← Back to Dashboard</button>
+      </a>
+    {% endif %}
+  </div>
 {% endblock %}
