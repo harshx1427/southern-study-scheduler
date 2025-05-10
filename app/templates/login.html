@@ -11,20 +11,30 @@
     <!--user is logging into their account -->
     
         <div class="login justify-content-center">
-    <form method="POST">
+    <form method="POST" class="form-container">
+      <div class="form1">
+        <br><br>
     {{ form.hidden_tag() }}
-    {{ form.southern_email.label }} {{ form.southern_email() }}
-    <br>  
-    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.southern_email.label }} 
+    {{ form.southern_email() }}
+    </div>
+
+    <div class="form3">
+    {{ form.password.label }} {{ form.password() }}
+    </div>
+    <br>
       <button type="submit" class="btn btn-primary">Login</button>
-    <br> <br>
+    <br> 
     </form>
+    <div class="text-center">
         <a href="{{ url_for('auth.register') }}"><type="button" class="btn btn-primary" id="accountButton"> New User? Create an Account</button></a>
     </div>
     <br>
 </div>
+  <div class="text-center">
     <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
-
+  </div>
+<div class="errormessage">
    {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <ul class="flashes">
@@ -36,7 +46,7 @@
       </ul>
     {% endif %}
   {% endwith %}
-
+</div>
  <!--   <script>
         function accountButton() {
             document.getElementById("accountButton").onclick = function() {

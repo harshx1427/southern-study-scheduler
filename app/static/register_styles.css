@@ -30,6 +30,25 @@ form{
     box-shadow: #111 0px 5px 10px;
 }
 
-.items{
-  align-items: center;
-}
+.form1 {
+            margin: 10px 0;
+            text-align: center;
+        }
+  
+.form2 {
+            margin: 10px 0;
+            text-align: center;
+            margin-right: 70px;
+        }
+ 
+.form3 {
+            margin: 10px 0;
+            text-align: center;
+            margin-right: 25px;
+        }
+
+ .form4 {
+            margin: 10px 0;
+            text-align: center;
+            margin-right: 88px;
+        }       

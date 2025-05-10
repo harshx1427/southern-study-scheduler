@@ -37,7 +37,27 @@ form{
     box-shadow: #111 0px 5px 10px;
 }
 
+.errormessage{
+  position: relative;
+  margin-top: 600px;
+}
 
+.backmain{
+  box-shadow: #111 0px 5px 10px;
+}
+
+.form1{
+   margin: 10px 0;
+  text-align: center;
+  margin-right: 50px;
+  
+}
+
+.form3{
+   margin: 10px 0;
+  text-align: center;
+  margin-right: 8px;
+}
 /* … your existing login CSS … */
 
 /* ---------------- */

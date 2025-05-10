@@ -1,7 +1,8 @@
 body{
   background-color: rgb(109, 160, 255);
   animation: fadein 2s;
- 
+  background-size: cover;
+  background-image: URL('scsu.svg');
 }
 
 @keyframes fadein {

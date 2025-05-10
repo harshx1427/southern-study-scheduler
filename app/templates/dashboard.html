@@ -12,6 +12,7 @@
       font-family: sans-serif;
       margin: 0;
       padding: 20px;
+      
     }
 
     .menu {
@@ -104,11 +105,134 @@
     }
 
   </style>
+<style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-size: cover;
+      background-image: URL('scsu_campus.jpeg');
+    }
 
+    .user-area {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: #f3f3f3;
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .user-info:hover {
+      color: #007bff;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      margin-right: 6px;
+    }
+
+    .logout-button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .logout-button:hover {
+      background-color: #c82333;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: #fff;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu a button {
+      padding: 10px 18px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .menu a button:hover {
+      background-color: #0056b3;
+    }
+
+    .profile-container {
+      max-width: 600px;
+      margin: 100px auto 30px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .profile-container h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-container p {
+      font-size: 16px;
+      padding-left: 10px;
+      border-left: 4px solid #007bff;
+      margin-bottom: 15px;
+    }
+
+    .back-link {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .back-link button {
+      padding: 10px 18px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .back-link button:hover {
+      background-color: #5a6268;
+    }
+  </style>
 
 </head>
 
 <body class="dashboard">
+  <div class="grouperror">
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <ul class="flashes">
@@ -120,6 +244,7 @@
       </ul>
     {% endif %}
   {% endwith %}
+  </div>
 
   {% if current_user.is_authenticated %}
     <div class="user-area">
@@ -155,7 +280,7 @@
   <header>
 
   <nav class="navbar">
-    <a href="{{ url_for('main.create_group') }}" class="btn"><button> Create a Study Group</button></a>
+    <a href="{{ url_for('main.create_group') }}" class="btn btn-primary"><button> Create a Study Group </button></a>
 
   </nav>
 
@@ -171,7 +296,7 @@
     <button type="submit">Search</button>
   </form>
 
-   <h2> list of groups</h2>
+   <h2>List of Groups</h2>
   <div class="group-container">
     <ul class="group-list">
 
@@ -183,7 +308,7 @@
         </a>
       </h3>
         <p>{{ group.description }}</p>
-
+<div class="groupnotif">
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% for category, message in messages %}
           {% set join_cat = 'join_success_' ~ group.id %}
@@ -195,7 +320,7 @@
           {% endif %}
         {% endfor %}
       {% endwith %}
-
+</div>
         {% if group.id in member_group_ids %}
           <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
             <button type="submit" class="btn">Leave Group</button>
