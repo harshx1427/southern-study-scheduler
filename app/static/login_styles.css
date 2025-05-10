@@ -4,16 +4,43 @@
 /* Login-page styles (unchanged) */
 /* ---------------- */
 
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f0f4f8;
+  background: #73b2f1;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+   background-size: cover;
+  background-image: URL('scsu_campus.jpeg');
+  animation: fadein 2s;;
 }
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
+
+h1{
+  text-align: center;
+  margin-top: -400px;
+  margin-left: 150px;
+}
+form{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+}
+.login{
+  position: fixed;
+    width: 520px;
+    height: 350px;
+    padding: 10px;
+    background-color: #fff;
+    border: 5px solid gray;
+    margin-left: 700px;
+    margin-top: 650px;
+    box-shadow: #111 0px 5px 10px;
+}
+
 
 /* … your existing login CSS … */
 

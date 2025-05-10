@@ -6,15 +6,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
  </head>
  <body>
+    
     <h1> SCSU Study Group Finder </h1>
     <!--user is logging into their account -->
+    <div class="login">
     <form method="POST">
     {{ form.hidden_tag() }}
     {{ form.southern_email.label }} {{ form.southern_email() }}<br>
     {{ form.password.label }} {{ form.password() }}<br>
     {{ form.submit() }} <br> <br>
     </form>
-    <a href="{{ url_for('auth.register') }}"><button type="button" id="accountButton">Create an Account</button></a>
+    <a href="{{ url_for('auth.register') }}"><button type="button" id="accountButton"> New User? Create an Account</button></a>
+    </div>
     <br>
     <a href="{{ url_for('main.index') }}"><button>← Back to Main</button></a>
 
