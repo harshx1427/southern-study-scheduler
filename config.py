@@ -10,11 +10,8 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-
+    MAIL_DEFAULT_SENDER = ('Study Group Finder', MAIL_USERNAME)
     ADMIN_EMAILS = ['admin@southernct.edu']
 
-
-
-
-
-
+class DevelopmentConfig(Config):
+    DEBUG = True

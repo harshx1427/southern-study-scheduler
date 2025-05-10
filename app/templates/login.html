@@ -3,26 +3,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Login </title>
-   
- </head>
- <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'login_styles.css') }}">
 
-    <h1> SCSU Study Group Finder </h1>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}"> 
+    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+</head>
+ <body>
     <!--user is logging into their account -->
-    <form method="POST">
+    
+        <div class="login justify-content-center">
+    <form method="POST" class="form-container">
+      <div class="form1">
+        <br><br>
     {{ form.hidden_tag() }}
-    {{ form.email.label }} {{ form.email() }}<br>
-    {{ form.password.label }} {{ form.password() }}<br>
-    {{ form.submit() }} <br> <br>
-    <button type="button"> Create an Account </button>
+    {{ form.southern_email.label }} 
+    {{ form.southern_email() }}
+    </div>
+
+    <div class="form3">
+    {{ form.password.label }} {{ form.password() }}
+    </div>
     <br>
-    <script>
+      <button type="submit" class="btn btn-primary">Login</button>
+    <br> 
+    </form>
+    <div class="text-center">
+        <a href="{{ url_for('auth.register') }}"><type="button" class="btn btn-primary" id="accountButton"> New User? Create an Account</button></a>
+    </div>
+    <br>
+</div>
+  <div class="text-center">
+    <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
+  </div>
+<div class="errormessage">
+   {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          {% if category == 'success_create' or category == 'danger' %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</div>
+ <!--   <script>
         function accountButton() {
-            doucment.getElementById("accountButton").onclick = function() {
+            document.getElementById("accountButton").onclick = function() {
+>>>>>>> 9c6d83a36452b4d94888538f07970b4cdc87e44c
                 window.location.href = "/register";
             };
         }
     </script>
+  -->
  </body>
 </html> 

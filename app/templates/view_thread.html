@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ thread.title }}{% endblock %}
+
+{% block content %}
+  <a href="{{ url_for('main.view_group', group_id=group.id) }}">
+    <button>← Back to {{ group.name }}</button>
+  </a>
+
+  <h2>{{ thread.title }}</h2>
+
+  <div class="replies">
+    {% for m in messages %}
+      <div class="reply">
+        <p>{{ m.content }}</p>
+        <p class="metadata">
+          <span class="author">
+            {{ m.author.name }}
+            ({{ 'Host' if m.author.id == group.creator.id else 'Member' }})
+          </span>
+          <span class="timestamp">· {{ m.posted_at.strftime('%Y-%m-%d %H:%M') }}</span>
+        </p>
+      </div>
+    {% else %}
+      <p>No replies yet.</p>
+    {% endfor %}
+  </div>
+
+  {% if is_member %}
+    <hr>
+    <form method="POST"
+          action="{{ url_for('threads.view_thread', group_id=group.id, thread_id=thread.id) }}">
+      {{ form.hidden_tag() }}
+      {{ form.content.label }}<br>
+      {{ form.content(rows=3, cols=50) }}<br><br>
+      {{ form.submit(value='Post Reply') }}
+    </form>
+  {% endif %}
+{% endblock %}

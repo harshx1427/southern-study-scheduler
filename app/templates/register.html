@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Create an Account </title>
+ </head>
+ <body>
+
+   <link rel="stylesheet" href="{{ url_for('static', filename='register_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+    <!-- user is creating their study group finder account -->
+   <div class="register justify-content-center">
+    <br>
+   <form method="POST" class="form-container">
+    <div class="form1">
+            {{ form.name.label }}
+            {{ form.name() }}
+        </div>
+
+        <div class="form2">
+            {{ form.southern_email.label }}
+            {{ form.southern_email() }}
+        </div>
+
+        <div class="form3">
+            {{ form.password.label }}
+            {{ form.password() }}
+        </div>
+
+        <div class="form4">
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password() }}
+        </div>
+
+<br>
+  <button type="submit" class="btn btn-primary"> Register </button>
+    </form>
+</div>
+<div class="text-center">
+      <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
+      </div>
+ </body>
+</html>
