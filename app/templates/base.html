@@ -22,7 +22,7 @@
 
       <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
       <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-      <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
+      <a href="{{ url_for('main.view_my_groups') }}"><button> Groups </button></a>
       <a href="{{ url_for('auth.message') }}"><button>
         Messages
         {% if unread_count > 0 %}
