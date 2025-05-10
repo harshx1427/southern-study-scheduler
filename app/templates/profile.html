@@ -2,28 +2,30 @@
 <html>
 <head>
   <title>Profile</title>
-
   <style>
     body {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: sans-serif;
       margin: 0;
-      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
     }
 
-    .menu {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 20px;
+    .user-area {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: #f3f3f3;
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
     .user-info {
       display: flex;
       align-items: center;
-      gap: 6px;
       text-decoration: none;
       color: #333;
     }
@@ -40,21 +42,8 @@
       border-radius: 50%;
       text-align: center;
       line-height: 28px;
-      font-size: 14px;
       font-weight: bold;
-    }
-
-    .user-area {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background-color: #f3f3f3;
-      padding: 6px 10px;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      margin-right: 6px;
     }
 
     .logout-button {
@@ -66,53 +55,83 @@
       font-size: 12px;
       cursor: pointer;
       transition: background-color 0.2s ease;
-      display: inline-block;
     }
 
     .logout-button:hover {
       background-color: #c82333;
-      text-decoration: none;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: #fff;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu a button {
+      padding: 10px 18px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .menu a button:hover {
+      background-color: #0056b3;
     }
 
     .profile-container {
       max-width: 600px;
-      margin: 60px auto;
+      margin: 100px auto 30px;
       padding: 30px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
       background-color: #fff;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      font-family: Arial, sans-serif;
     }
 
     .profile-container h1 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .profile-container p {
       font-size: 16px;
-      margin: 10px 0;
       padding-left: 10px;
-      border-left: 3px solid #007bff;
+      border-left: 4px solid #007bff;
+      margin-bottom: 15px;
     }
 
     .back-link {
-      display: block;
-      margin-top: 30px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
     }
 
-  </style>
+    .back-link button {
+      padding: 10px 18px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
+    .back-link button:hover {
+      background-color: #5a6268;
+    }
+  </style>
 </head>
 <body>
+
   {% if current_user.is_authenticated %}
     <div class="user-area">
       <a href="{{ url_for('main.profile') }}" class="user-info">
-        <div class="user-avatar">
-          {{ current_user.name[0]|upper }}
-        </div>
+        <div class="user-avatar">{{ current_user.name[0]|upper }}</div>
         <span>{{ current_user.name }}</span>
       </a>
       <form method="GET" action="{{ url_for('auth.logout') }}">
@@ -122,17 +141,17 @@
   {% endif %}
 
   <div class="menu">
-
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
-      Messages
-      {% if unread_count > 0 %}
-        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
-      {% endif %}
-    </button></a>
-
+    <a href="{{ url_for('main.dashboard') }}"><button>Home</button></a>
+    <a href="{{ url_for('main.profile') }}"><button>Profile</button></a>
+    <a href="{{ url_for('main.create_group') }}"><button>Groups</button></a>
+    <a href="{{ url_for('auth.message') }}">
+      <button>
+        Messages
+        {% if unread_count > 0 %}
+          <span style="color: yellow; font-weight: bold;">({{ unread_count }})</span>
+        {% endif %}
+      </button>
+    </a>
   </div>
 
   <div class="profile-container">
@@ -140,9 +159,11 @@
     <p><strong>Email:</strong> {{ current_user.southern_email }}</p>
     <p><strong>Name:</strong> {{ current_user.name }}</p>
     <p><strong>Account Created:</strong> {{ current_user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
-
   </div>
 
-  <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
+  <div class="back-link">
+    <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
+  </div>
+
 </body>
 </html>
