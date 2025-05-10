@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ group.name }}{% endblock %}
+
+{% block content %}
+  <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
+
+  <div class="layout">
+
+    <!-- Main content -->
+    <div class="main-content">
+      <h2>{{ group.name }}</h2>
+      <p><strong>Subject:</strong> {{ group.subject }}</p>
+      <p><strong>When:</strong> {{ group.meet_time.strftime('%Y-%m-%d %H:%M') }}</p>
+      <p><strong>Where:</strong> {{ group.location }}</p>
+      <p><strong>Description:</strong> {{ group.description }}</p>
+
+      {% if is_member %}
+        <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
+          <button class="btn">Leave Group</button>
+        </form>
+      {% else %}
+        <form method="POST" action="{{ url_for('main.join_group', group_id=group.id) }}">
+          <button class="btn">Join Group</button>
+        </form>
+      {% endif %}
+
+      <hr>
+
+      {% if is_member %}
+        <a href="{{ url_for('threads.new_thread', group_id=group.id) }}">
+          <button class="btn">Create New Post</button>
+        </a>
+
+        <h3>Posts</h3>
+        <ul>
+          {% for thread in group.forums %}
+            <li>
+              <a href="{{ url_for('threads.view_thread', group_id=group.id, thread_id=thread.id) }}">
+                <button>{{ thread.title }}</button>
+              </a>
+            </li>
+          {% else %}
+            <li>No posts yet.</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p style="color: gray;"><em>Join this group to view and start posts.</em></p>
+      {% endif %}
+    </div>
+
+    <!-- Minimal sidebar -->
+    <aside class="sidebar">
+      <p><strong>Host:</strong><a href="{{ url_for('main.profile_view', user_id=group.creator.id, group_id=group.id) }}">{{ group.creator.name }}</a></p>
+      <p><strong>Members:</strong> {{ group.memberships|length }}</p>
+
+      <h4>Member List</h4>
+      <ul style="list-style: none; padding-left: 0; margin: 0;">
+        {% for m in group.memberships %}
+          {% if m.user.id != group.creator.id %}
+            <li> <a href="{{ url_for('main.profile_view', user_id=m.user.id, group_id=group.id) }}">
+              {{ m.user.name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </aside>
+
+  </div>
+{% endblock %}
