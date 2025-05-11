@@ -11,6 +11,7 @@
       font-family: sans-serif;
       margin: 0;
       padding: 20px;
+      background-color: antiquewhite;
     }
 
     .menu {
@@ -101,12 +102,20 @@
       background-color: #c82333;
       text-decoration: none;
     }
+.sendmessage{
+    margin-left: 500px;
+}
 
+    
   </style>
 
 </head>
 
 <body>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">  
+  <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+
   {% if current_user.is_authenticated %}
     <div class="user-area">
       <a href="{{ url_for('main.profile') }}" class="user-info">
@@ -124,10 +133,10 @@
 
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.view_my_groups') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><button class="btn btn-primary"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><button class="btn btn-primary"> Profile </button></a>
+    <a href="{{ url_for('main.view_my_groups') }}"><button class="btn btn-primary"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><button class="btn btn-primary">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
@@ -139,7 +148,7 @@
   <div class="chat-container">
 
 
-    <h1>Send Message to {{ recipient.name }}</h1>
+    <h2> Chat with {{ recipient.name }}</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -151,7 +160,7 @@
       {% endif %}
     {% endwith %}
 
-    <h3>Conversation with {{ recipient.name }}</h3>
+
     <div class="chat-box">
       <ul>
         {% for m in messages %}
@@ -171,11 +180,13 @@
       {{ form.hidden_tag() }}
       {{ form.content.label }}<br>
       {{ form.content(rows=4) }}<br><br>
+      <div class="sendmessage">
       {{ form.submit() }}
+      </div>
     </form>
   </div>
 
-  <a href="{{ url_for('auth.message') }}"><button>← Back to Message</button></a>
+  <a href="{{ url_for('auth.message') }}"><button class="btn btn-primary">← Back to Messages </button></a>
 
   <script>
     const chatBox = document.querySelector('.chat-box');
@@ -183,3 +194,4 @@
   </script>
 
 </body>
+</html>

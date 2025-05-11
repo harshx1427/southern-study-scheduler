@@ -3,7 +3,7 @@
 
 {% block content %}
   <a href="{{ url_for('main.view_group', group_id=group.id) }}">
-    <button>← Back to {{ group.name }}</button>
+    <button class="btn btn-primary">← Back to {{ group.name }}</button>
   </a>
 
   <h2>{{ thread.title }}</h2>

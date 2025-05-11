@@ -9,7 +9,7 @@
   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
 </head>
 
-<body class="dashboard">
+<body>
   <div class="grouperror">
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -41,10 +41,10 @@
 
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.view_my_groups') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><type="button" class="btn btn-primary"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><type="button" class="btn btn-primary"> Profile </button></a>
+    <a href="{{ url_for('main.view_my_groups') }}"><type="button" class="btn btn-primary"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><type="button" class="btn btn-primary">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
@@ -57,10 +57,9 @@
   <h1>Welcome {{ current_user.name }}!</h1>
   <header>
 
-  <nav class="navbar">
-    <a href="{{ url_for('main.create_group') }}" class="btn btn-primary" button> Create a Study Group </button></a>
-
-  </nav>
+  <div class="navbar">
+    <a href="{{ url_for('main.create_group') }}" class="btn btn-primary btn-lg" button> Create a Study Group </button></a>
+  </div>
 
   </header>
 
@@ -73,8 +72,9 @@
     >
     <button type="submit">Search</button>
   </form>
-
+  <div class="listgrouphead">
    <h2>List of Groups</h2>
+   </div>
   <div class="group-container">
     <ul class="group-list">
 
@@ -101,11 +101,11 @@
 </div>
         {% if group.id in member_group_ids %}
           <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
-            <button type="submit" class="btn">Leave Group</button>
+            <button type="submit" class="btn btn-danger">Leave Group</button>
           </form>
         {% else %}
           <form method="POST" action="{{ url_for('main.join_group', group_id=group.id) }}">
-            <button type="submit" class="btn">Join Group</button>
+            <button type="submit" class="btn btn-primary">Join Group</button>
           </form>
         {% endif %}
       </li>

@@ -6,6 +6,7 @@
 <body>
 
   <div style="display: flex; justify-content: space-between; gap: 40px; align-items: flex-start;">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='viewgroupstyles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
@@ -23,7 +24,7 @@
           {% for group in created_groups %}
             <li style="margin-bottom: 20px;">
               <a href="{{ url_for('main.view_group', group_id=group.id) }}">
-                <button>{{ group.name }}</button>
+                <button class="btn btn-primary">{{ group.name }}</button>
               </a>
             </li>
           {% endfor %}
@@ -34,7 +35,7 @@
         <p>No groups created yet.<br>
            Want to create a group?
            <a href="{{ url_for('main.create_group') }}">
-             <button>Create A Group</button>
+             <button class="btn btn-primary">Create A Group</button>
            </a>
         </p>
         </div>
@@ -52,7 +53,7 @@
           {% for group in joined_groups %}
             <li style="margin-bottom: 10px;">
               <a href="{{ url_for('main.view_group', group_id=group.id) }}">
-                <button>{{ group.name }}</button>
+                <button class="btn btn-primary">{{ group.name }}</button>
               </a>
             </li>
           {% endfor %}
@@ -63,7 +64,9 @@
         <p>No groups joined yet.<br>
            Want to join a group?
            <a href="{{ url_for('main.dashboard') }}">
+            <div class="findgroupbutton">
              <type="button" class="btn btn-primary">Find A Group</button>
+            </div>
            </a>
         </p>
         </div>
@@ -74,6 +77,6 @@
   </div>
 
   <br>
-  <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
+  <a href="{{ url_for('main.dashboard') }}"><button class="btn btn-primary">← Back to Dashboard</button></a>
 {% endblock %}
 </body>

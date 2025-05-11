@@ -4,7 +4,8 @@
       align-items: center;
       font-family: sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0px;
+      
       
     }
 
@@ -14,10 +15,37 @@
       margin-bottom: 20px;
     }
 
+
+ h2{
+    text-align: center;
+    
+ }   
+.listgrouphead{
+  position: fixed;
+    width: 320px;
+    height: 60px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 250px;
+    box-shadow: #111 0px 5px 10px;
+}
+
     .group-container {
-      width: 90%;
-      max-width: 700px;
-      text-align: left;
+      position: fixed;
+    width: 520px;
+    height: 450px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 340px;
+    box-shadow: #111 0px 5px 10px;
     }
 
     .group-list {
@@ -97,16 +125,22 @@
       text-decoration: none;
     }
 
-  </style>
-<style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-size: cover;
-      background-image: URL('scsu_campus.jpeg');
-    }
-
-    .user-area {
+  
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('scsu.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.4;         
+  z-index: -1;       
+  pointer-events: none; 
+}
+   .user-area {
       position: absolute;
       top: 15px;
       right: 20px;

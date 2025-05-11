@@ -2,6 +2,7 @@
 {% block title %}{{ group.name }}{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='thread_styles.css') }}">
   <div class="page-header">
     <a href="{{ url_for('main.dashboard') }}" class="btn-back">← Back to Dashboard</a>
   </div>
