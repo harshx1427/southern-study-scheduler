@@ -2,40 +2,53 @@
 {% block title %}My Groups{% endblock %}
 
 {% block content %}
-  <h1>My Study Groups</h1>
+  
+<body>
 
   <div style="display: flex; justify-content: space-between; gap: 40px; align-items: flex-start;">
+    <link rel="stylesheet" href="{{ url_for('static', filename='viewgroupstyles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
 
+    <h1>My Study Groups</h1>
     <!-- Left: Created Groups -->
-    <div style="flex: 1; border: 1px solid #ccc; padding: 15px; background-color: #f9f9f9;">
+
+
+    <div class="createdgrouphead">
       <h3>Groups I Created</h3>
+      </div>
       {% if created_groups %}
-        <ul style="list-style: none; padding-left: 0;">
+        <div class="createdgroup">
+        <ul style="list-style: none; padding-left: 0; margin-top: 50px;">
           {% for group in created_groups %}
-            <li style="margin-bottom: 10px;">
+            <li style="margin-bottom: 20px;">
               <a href="{{ url_for('main.view_group', group_id=group.id) }}">
                 <button>{{ group.name }}</button>
               </a>
             </li>
           {% endfor %}
         </ul>
+        </div>
       {% else %}
-
+        <div class="creategrouptext">
         <p>No groups created yet.<br>
            Want to create a group?
            <a href="{{ url_for('main.create_group') }}">
-             <button>Create Group</button>
+             <button>Create A Group</button>
            </a>
         </p>
-
+        </div>
       {% endif %}
     </div>
 
     <!-- Right: Joined Groups -->
-    <div style="flex: 1; border: 1px solid #ccc; padding: 15px; background-color: #f9f9f9;">
+    <div class="joinedgrouphead">
       <h3>Groups I Joined</h3>
+    </div>
+          <div class="joinedgroup">
       {% if joined_groups %}
         <ul style="list-style: none; padding-left: 0;">
+      
           {% for group in joined_groups %}
             <li style="margin-bottom: 10px;">
               <a href="{{ url_for('main.view_group', group_id=group.id) }}">
@@ -45,13 +58,15 @@
           {% endfor %}
         </ul>
       {% else %}
-
+      </div>
+        <div class="joingrouptext">
         <p>No groups joined yet.<br>
            Want to join a group?
            <a href="{{ url_for('main.dashboard') }}">
-             <button>Find a Group</button>
+             <type="button" class="btn btn-primary">Find A Group</button>
            </a>
         </p>
+        </div>
 
       {% endif %}
     </div>
@@ -61,3 +76,4 @@
   <br>
   <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
 {% endblock %}
+</body>

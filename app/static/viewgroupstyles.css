@@ -1,0 +1,73 @@
+h1{
+    text-align: center;
+    margin-left: 520px;
+    
+}
+h3{
+    text-align: center;
+}
+
+.createdgrouphead{
+    position: fixed;
+    width: 320px;
+    height: 60px;
+    padding: 10px;
+    background-color: #fff;
+    border: 5px solid gray;
+    border-radius: 5px;;
+    margin-left: 140px;
+    margin-top: 55px;
+    box-shadow: #111 0px 5px 10px;
+}
+
+.createdgroup{
+ position: fixed;
+    width: 520px;
+    height: 350px;
+    padding: 10px;
+    background-color: #fff;
+    border: 5px solid gray;
+    border-radius: 5px;;
+    margin-left: 40px;
+    margin-top: 158px;
+    box-shadow: #111 0px 5px 10px;
+}
+
+.creategrouptext{
+      position: fixed;
+    margin-left: 950px;
+    margin-top: 200px;
+}
+
+
+.joinedgrouphead{
+    position: fixed;
+    width: 320px;
+    height: 60px;
+    padding: 10px;
+    background-color: #fff;
+    border: 5px solid gray;
+    border-radius: 5px;;
+    margin-left: 900px;
+    margin-bottom: 150px;
+    box-shadow: #111 0px 5px 10px;
+}
+
+.joinedgroup{
+ position: fixed;
+    width: 520px;
+    height: 350px;
+    padding: 10px;
+    background-color: #fff;
+    border: 5px solid gray;
+    border-radius: 5px;;
+    margin-left: 800px;
+    margin-top: 100px;
+    box-shadow: #111 0px 5px 10px;
+}
+
+.joingrouptext{
+    position: fixed;
+    margin-left: 950px;
+    margin-top: 200px;
+}
