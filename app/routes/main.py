@@ -131,6 +131,27 @@ def leave_group(group_id):
     return redirect(url_for('main.dashboard'))
 
 
+@main_bp.route('/my_groups')
+@login_required
+def view_my_groups():
+    created_groups = StudyGroup.query.filter_by(created_by_id=current_user.id).all()
+
+    joined_groups = (
+        StudyGroup.query
+        .join(Membership)
+        .filter(Membership.user_id == current_user.id)
+        .all()
+    )
+
+    unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
+    return render_template(
+        'view_my_groups.html',
+        created_groups=created_groups,
+        joined_groups=joined_groups,
+        unread_count=unread_count
+    )
+
+
 @main_bp.route('/profile')
 @login_required
 def profile():
