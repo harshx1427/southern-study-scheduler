@@ -1,22 +1,58 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Create an Account </title>
- </head>
- <body>
-
-   <link rel="stylesheet" href="{{ url_for('static', filename='register_styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
-   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
-    <!-- user is creating their study group finder account -->
-   <div class="register justify-content-center">
-    <br>
-   <form method="POST" class="form-container">
-    <div class="form1">
-            {{ form.name.label }}
-            {{ form.name() }}
-        </div>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #73b2f1;
+    margin: 0;
+    padding: 0;
+     background-size: cover;
+    background-image: URL('scsu.svg');
+    animation: fadein 2s;
+  }
+  
+  @keyframes fadein {
+      from {opacity: 0;}
+      to {opacity: 2;}
+  }
+  
+  
+  form{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+  }
+  .register{
+    position: fixed;
+      width: 520px;
+      height: 350px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid gray;
+      border-radius: 8px;
+      margin-left: 700px;
+      margin-top: 300px;
+      box-shadow: #111 0px 5px 10px;
+  }
+  
+  .form1 {
+              margin: 10px 0;
+              text-align: center;
+          }
+    
+  .form2 {
+              margin: 10px 0;
+              text-align: center;
+              margin-right: 70px;
+          }
+   
+  .form3 {
+              margin: 10px 0;
+              text-align: center;
+              margin-right: 25px;
+          }
+  
+   .form4 {
+              margin: 10px 0;
+              text-align: center;
+              margin-right: 88px;
+          }       
 
         <div class="form2">
             {{ form.southern_email.label }}
