@@ -2,16 +2,16 @@
 {% block title %}{{ group.name }}{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='thread_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
   <div class="page-header">
-    <a href="{{ url_for('main.dashboard') }}" class="btn-back">← Back to Dashboard</a>
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">← Back to Dashboard</a>
   </div>
 
-  <div class="group-layout">
+  <div class="group-layout" style="max-height: 600px; overflow-y: auto; margin: 25px; border: 2px solid rgb(255, 255, 255); border-radius: 8px; background-color: aliceblue; box-shadow: #111 0px 5px 10px;">
     <!-- Main Group Info -->
     <section class="group-main">
       <h2>{{ group.name }}</h2>
-      <div class="group-details">
+      <div class="group_details">
         <p><strong>Subject:</strong> {{ group.subject }}</p>
         <p><strong>When:</strong> {{ group.meet_time.strftime('%Y-%m-%d %H:%M') }}</p>
         <p><strong>Where:</strong> {{ group.location }}</p>
@@ -25,7 +25,7 @@
           </form>
         {% else %}
           <form method="POST" action="{{ url_for('main.join_group', group_id=group.id) }}">
-            <button class="btn btn-primary">Join Group</button>
+            <button class="btn btn-success">Join Group</button>
           </form>
         {% endif %}
       </div>
@@ -34,7 +34,7 @@
         <hr>
         <div class="forum-section">
           <a href="{{ url_for('threads.new_thread', group_id=group.id) }}">
-            <button class="btn btn-secondary">Create New Post</button>
+            <button class="btn btn-primary">Create New Post</button>
           </a>
 
           <h3>Posts</h3>

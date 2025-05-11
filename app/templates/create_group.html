@@ -81,10 +81,23 @@
     height: 550px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
+    border: 1px solid gray;
+    border-radius: 8px;
     margin-left: 0px;
     margin-top: 250px;
     box-shadow: #111 0px 5px 10px;
+       animation: slideup 2s;
+}
+
+@keyframes slideup {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
   .subject{
@@ -120,6 +133,11 @@
             text-align: center;
            
   }
+
+.create{
+  margin-left: 190px;
+}
+
   </style>
 
 </head>
@@ -145,10 +163,10 @@
 
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><button class="btn btn-primary"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><button class="btn btn-primary"> Profile </button></a>
+    <a href="{{ url_for('main.create_group') }}"><button class="btn btn-primary"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><button class="btn btn-primary">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
@@ -165,7 +183,7 @@
 
       <div class="subject">
         {{ form.subject.label }}<br>
-        {{ form.subject(size=30) }}<br>
+        {{ form.subject(placeholder="Enter your desired subject", size=30) }}<br>
         {% for err in form.subject.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}
@@ -182,7 +200,7 @@
 
       <div class="location">
         {{ form.location.label }}<br>
-        {{ form.location(size=40) }}<br>
+        {{ form.location(placeholder="Enter your location or link", size=40) }}<br>
         {% for err in form.location.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}
@@ -190,7 +208,7 @@
 
       <div class="groupname">
         {{ form.name.label }}<br>
-        {{ form.name(size=40) }}<br>
+        {{ form.name(placeholder="Enter your group name", size=40) }}<br>
         {% for err in form.name.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}
@@ -198,7 +216,7 @@
 
       <div class="description">
         {{ form.description.label }}<br>
-        {{ form.description(rows=4, cols=40) }}<br>
+        {{ form.description(placeholder="Add any additional information!", rows=4, cols=40) }}<br>
         {% for err in form.description.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}

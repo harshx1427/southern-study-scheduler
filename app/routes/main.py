@@ -108,7 +108,7 @@ def join_group(group_id):
     db.session.add(new_membership)
     try:
         db.session.commit()
-        flash(f'You joined "{group.name}"', f'join_success_{group.id}')
+        flash(f'You joined {group.name}!', f'join_success_{group.id}')
     except:
         db.session.rollback()
         flash('Could not join (already a member?)', 'warning')
@@ -125,9 +125,9 @@ def leave_group(group_id):
     if membership:
         db.session.delete(membership)
         db.session.commit()
-        flash(f'You have left "{group.name}"', f'leave_success_{group.id}')
+        flash(f'You have left {group.name}.', f'leave_success_{group.id}')
     else:
-        flash('You are not a member of this group', 'warning')
+        flash('You are not a member of this group.', 'warning')
     return redirect(url_for('main.dashboard'))
 
 

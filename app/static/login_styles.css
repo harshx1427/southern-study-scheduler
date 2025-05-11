@@ -1,10 +1,3 @@
-/* static/login_styles.css */
-
-/* ---------------- */
-/* Login-page styles (unchanged) */
-/* ---------------- */
-
-
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #73b2f1;
@@ -31,7 +24,8 @@ form{
     height: 350px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
+    border: 1px solid gray;
+    border-radius: 8px;
     margin-left: 700px;
     margin-top: 300px;
     box-shadow: #111 0px 5px 10px;
@@ -58,51 +52,9 @@ form{
   text-align: center;
   margin-right: 8px;
 }
-/* … your existing login CSS … */
 
-/* ---------------- */
-/* Shared nav/link styles */
-/* ---------------- */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  background-color: #ffffff;
-}
-
-.btn {
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.logout {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-.logout:hover {
-  text-decoration: underline;
-}
-
-/* ---------------- */
-/* Dashboard overrides */
-/* ---------------- */
-
-body.dashboard {
-  display: block;    /* cancel the flex centering */
-  padding-top: 1rem;
-}
-
-body.dashboard .btn {
-  border-radius: 0;  /* squared corners */
-}
-
-body.dashboard .navbar {
-  justify-content: space-between;  /* Create left, Logout right */
+.backtomain{
+  position: fixed;
+  margin-top: 580px;
+  margin-left: 890px;
 }

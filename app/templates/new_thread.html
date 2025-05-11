@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% block title %}New Thread{% endblock %}
 {% block content %}
-<a href="{{ url_for('main.view_group', group_id=group.id) }}"><button>← Back to Group</button></a>
-  <h2>Create Thread in {{ group.name }}</h2>
-  <form method="post">
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">  
+  <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+
+<a href="{{ url_for('main.view_group', group_id=group.id) }}"><button class="btn btn-primary">← Back to Group</button></a>
+  <h2>Create A Thread </h2>
+  <form method="post" style="border: 2px solid rgb(255, 255, 255); border-radius: 8px; box-shadow: #111 0px 2px 5px; background-color: aliceblue; padding: 20px; padding-left: 100px; margin-right: 300px; margin-top: 50px;">
     {{ form.hidden_tag() }}
-    {{ form.title.label }}<br>{{ form.title() }}<br>
-    {{ form.content.label }}<br>{{ form.content(rows=4) }}<br>
-    {{ form.submit() }}
+    {{ form.title.label }}<br>
+    {{ form.title(size=50) }}<br>
+    {{ form.content.label }}
+    <br>{{ form.content(rows=5, cols=80) }}<br>
+    {{ form.submit(class="btn btn-primary") }}
   </form>
 {% endblock %}

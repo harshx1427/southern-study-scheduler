@@ -5,9 +5,7 @@
       font-family: sans-serif;
       margin: 0;
       padding: 0px;
-      
-      
-    }
+  }
 
     .menu {
       width: 100%;
@@ -30,10 +28,15 @@
     border-radius: 8px;
     margin-left: auto;
     margin-right: auto; 
-    margin-top: 250px;
+    margin-top: 270px;
     box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
 }
 
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
     .group-container {
       position: fixed;
     width: 520px;
@@ -46,8 +49,13 @@
     margin-right: auto;
     margin-top: 340px;
     box-shadow: #111 0px 5px 10px;
-    }
+      animation: fadein 2s;
+}
 
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
     .group-list {
       max-height: 400px;
       overflow-y: auto;
@@ -253,4 +261,13 @@ body::before {
 
     .back-link button:hover {
       background-color: #5a6268;
+    }
+
+    .createsuccess{
+      margin-top: 500px;
+    }
+
+    .group_details{
+      margin-left: auto;
+      margin-right: auto; 
     }

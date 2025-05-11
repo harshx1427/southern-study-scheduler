@@ -13,11 +13,17 @@ h3{
     height: 60px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
-    border-radius: 5px;;
+    border: 2px solid gray;
+    border-radius: 8px;
     margin-left: 140px;
     margin-top: 130px;
     box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
 }
 
 .createdgroup{
@@ -26,19 +32,23 @@ h3{
     height: 350px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
-    border-radius: 5px;;
+    border: 2px solid gray;
+    border-radius: 8px;
     margin-left: 40px;
     margin-top: 207px;
     box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
 }
 
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
 .creategrouptext{
       position: fixed;
     margin-left: 950px;
     margin-top: 200px;
 }
-
 
 .joinedgrouphead{
     position: fixed;
@@ -46,11 +56,17 @@ h3{
     height: 60px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
-    border-radius: 5px;;
-    margin-left: 900px;
-    margin-top: 70px;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: 810px;
+    margin-top: 295px;
     box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
 }
 
 .joinedgroup{
@@ -59,13 +75,18 @@ h3{
     height: 350px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
-    border-radius: 5px;;
+    border: 2px solid gray;
+    border-radius: 8px;
     margin-left: 800px;
-    margin-top: 150px;
+    margin-top: 370px;
     box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
 }
 
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
 .joingrouptext{
     position: fixed;
     margin-left: 950px;

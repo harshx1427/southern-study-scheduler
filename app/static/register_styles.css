@@ -24,7 +24,8 @@ form{
     height: 350px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
+    border: 1px solid gray;
+    border-radius: 8px;
     margin-left: 700px;
     margin-top: 300px;
     box-shadow: #111 0px 5px 10px;

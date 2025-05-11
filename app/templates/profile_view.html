@@ -3,6 +3,9 @@
 {% block title %}{{ user.name }}'s Profile{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
   <div class="profile-container" style="
     max-width: 600px;
     margin: 60px auto;

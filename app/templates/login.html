@@ -17,11 +17,12 @@
         <br><br>
     {{ form.hidden_tag() }}
     {{ form.southern_email.label }} 
-    {{ form.southern_email() }}
+    {{ form.southern_email(placeholder="Enter your email") }}
     </div>
 
     <div class="form3">
-    {{ form.password.label }} {{ form.password() }}
+    {{ form.password.label }} 
+    {{ form.password(placeholder="Enter your password") }}
     </div>
     <br>
       <button type="submit" class="btn btn-primary">Login</button>

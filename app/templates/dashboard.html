@@ -16,7 +16,9 @@
       <ul class="flashes">
         {% for category, message in messages %}
           {% if category == 'group_success' or category == 'warning' %}
+          <div class="createsuccess" >
             <li class="{{ category }}">{{ message }}</li>
+            </div>
           {% endif %}
         {% endfor %}
       </ul>
@@ -54,7 +56,7 @@
   </div>
 
 
-  <h1>Welcome {{ current_user.name }}!</h1>
+  <h2>Welcome {{ current_user.name }}!</h2>
   <header>
 
   <div class="navbar">
@@ -68,9 +70,9 @@
       type="text"
       name="q"
       placeholder="Search groups by name"
-      value="{{ q }}"
-    >
-    <button type="submit">Search</button>
+      value="{{ q }}">
+      
+    <button type="submit" class="btn btn-secondary">Search</button>
   </form>
   <div class="listgrouphead">
    <h2>List of Groups</h2>
@@ -82,7 +84,7 @@
       <li class="group-item">
         <h3>
           <a href="{{ url_for('main.view_group', group_id=group.id) }}">
-          <button>{{ group.name }}</button>
+          <button class="btn btn-primary">{{ group.name }}</button>
         </a>
       </h3>
         <p>{{ group.description }}</p>
@@ -92,9 +94,9 @@
           {% set join_cat = 'join_success_' ~ group.id %}
           {% set leave_cat = 'leave_success_' ~ group.id %}
           {% if category == join_cat %}
-            <h4 style="color: green;">{{ message }}</h4>
+            <h5 style="color: green; text-align: center;">{{ message }}</h5>
           {% elif category == leave_cat %}
-            <h4 style="color: red;">{{ message }}</h4>
+            <h5 style="color: red; text-align: center;" >{{ message }}</h5>
           {% endif %}
         {% endfor %}
       {% endwith %}
@@ -105,7 +107,7 @@
           </form>
         {% else %}
           <form method="POST" action="{{ url_for('main.join_group', group_id=group.id) }}">
-            <button type="submit" class="btn btn-primary">Join Group</button>
+            <button type="submit" class="btn btn-success">Join Group</button>
           </form>
         {% endif %}
       </li>

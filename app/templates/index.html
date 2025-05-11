@@ -8,7 +8,7 @@
     <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
 </head>
 <body>
-  <div class="home"> <h3> Welcome to Study Group Finder</h3>
+  <div class="home"> <h3> Welcome to Study Group Finder!</h3>
 <br><br>
   <div class="text-center">
   <a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-primary btn-lg mx-auto" width="10px">Log In</button></a></div>
@@ -27,8 +27,8 @@
       <ul class="flashes">
         {% for category, message in messages %}
           {% if category == 'success_logout' %}
-          <div class="text-center">
-            <li class="{{ category }}">{{ message }}</li>
+          <div class="logouttext">
+            <class="{{ category }}">{{ message }}
           </div>
           {% endif %}
         {% endfor %}
