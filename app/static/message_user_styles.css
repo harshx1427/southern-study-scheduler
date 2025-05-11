@@ -9,6 +9,7 @@ body {
   margin: 0;
   padding: 20px;
   background-color: #f0f4f8;
+  padding-top: 60px;
 }
 
 /* Top menu bar */
@@ -19,6 +20,12 @@ body {
   background-color: #007bff; /* Blue background */
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;              /* ensures it stretches all the way across */
+  height: 40px;          /* pick a height */
+  z-index: 1000;         /* sit on top of everything else */
 }
 .menu a {
   margin: 0 10px;
@@ -42,16 +49,17 @@ body {
 
 /* User info area */
 .user-area {
-  position: absolute;
-  top: 25px;
-  right: 25px;
+  position: fixed;
+  top: 7px; /* inside that 60px header—tweak as needed */
+  right: 30px;
   display: flex;
   align-items: center;
   gap: 12px;
   background-color: #ffffff;
-  padding: 6px 10px;
+  padding: 6px 20px;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);             
+  z-index: 1001;         /* above the .menu */
 }
 .user-info {
   display: flex;
