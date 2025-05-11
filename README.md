@@ -1,15 +1,13 @@
-Study Scheduler
+Southern Study Group Scheduler
 
 ​Southern study group scheduler will simplify forming and managing study groups based on a subject, schedule, and shared goals. 
 The application is designed for Southern Connecticut State University students and creates a collaborative environment 
 that encourages peer to peer support across different courses and departments.  
 
-​Students frequently struggle to locate and run study groups that meet their needs in academic settings. 
-The process may become chaotic and ineffective in the absence of a centralized system.
-A platform that makes it simple for users to start and find study groups and gives administrators the ability to efficiently manage
-users and listings is required to make this better. The system shown in the class diagram is based on this requirement for more efficient coordination and supervision. 
-
-​ 
+Students often have trouble finding and joining study groups that suit their needs, 
+leading to chaos without a centralized system. A platform is needed to simplify creating
+and locating study groups while allowing administrators to manage users and listings efficiently. 
+The class diagram outlines this system for better coordination and oversight.
 
 ​The Southern Study Group Schedular will let users: 
 
