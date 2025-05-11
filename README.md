@@ -5,3 +5,6 @@ The Southern Study Group Scheduler helps SCSU students easily find and join stud
 ## Installation
 
 pip download python flask
+
+## License
+[Scsu] 
