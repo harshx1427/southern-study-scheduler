@@ -49,7 +49,10 @@ def new_thread(group_id):
 def view_thread(group_id, thread_id):
     group = StudyGroup.query.get_or_404(group_id)
     thread = Forum.query.get_or_404(thread_id)
-    if not Membership.query.filter_by(user_id=current_user.id, study_group_id=group.id).first():
+
+    # ✅ Check membership and store result
+    is_member = Membership.query.filter_by(user_id=current_user.id, study_group_id=group.id).first() is not None
+    if not is_member:
         abort(403)
 
     form = ThreadReplyForm()
@@ -61,9 +64,17 @@ def view_thread(group_id, thread_id):
 
     messages = thread.messages
     unread_count = Message.query.filter_by(receiver_id=current_user.id, is_read=False).count()
-    return render_template('view_thread.html', group=group, thread=thread, messages=messages, form=form,
-                           unread_count=unread_count)
 
+    # ✅ Now pass is_member to the template
+    return render_template(
+        'view_thread.html',
+        group=group,
+        thread=thread,
+        messages=messages,
+        form=form,
+        unread_count=unread_count,
+        is_member=is_member
+    )
 
 @threads_bp.route('/groups/<int:group_id>/threads/<int:thread_id>/delete', methods=['POST'])
 @login_required

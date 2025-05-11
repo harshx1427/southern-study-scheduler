@@ -141,6 +141,7 @@
   {% endif %}
 
   <div class="menu">
+<<<<<<< HEAD
     <a href="{{ url_for('main.dashboard') }}"><button>Home</button></a>
     <a href="{{ url_for('main.profile') }}"><button>Profile</button></a>
     <a href="{{ url_for('main.create_group') }}"><button>Groups</button></a>
@@ -152,6 +153,19 @@
         {% endif %}
       </button>
     </a>
+=======
+
+    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
+    <a href="{{ url_for('main.view_my_groups') }}"><button> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><button>
+      Messages
+      {% if unread_count > 0 %}
+        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+      {% endif %}
+    </button></a>
+
+>>>>>>> 22e815ae49f2c11f527e23a7ed164735453c4ca9
   </div>
 
   <div class="profile-container">
