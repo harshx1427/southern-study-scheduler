@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Study Group</title>
-
+  <title>Create Study Group | SCSU Study Group Finder</title>
+      <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <style>
     body {
       display: flex;
@@ -75,34 +75,77 @@
       text-decoration: none;
     }
 
+    .createagroup {
+      position: fixed;
+    width: 520px;
+    height: 600px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin-left: 0px;
+    margin-top: 250px;
+    box-shadow: #111 0px 5px 10px;
+       animation: slideup 2s;
+}
+
+@keyframes slideup {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+  .subject{
+    margin: 10px 0;
+            text-align: center;
+  }
+  .date{
+    margin: 10px 0;
+            text-align: center;
+            
+  }
+
+  .location{
+    margin: 10px 0;
+            text-align: center;
+            
+  }
+
+  .groupname{
+    margin: 10px 0;
+            text-align: center;
+            
+  }
+
+
+  .location{
+    margin: 10px 0;
+            text-align: center;
+            
+  }
+  .description{
+    margin: 10px 0;
+            text-align: center;
+           
+  }
+
+.create{
+  margin-left: 190px;
+}
+
   </style>
 
 </head>
 
 <body>
-  <header>
-    <h1>Create a New Study Group</h1>
-  </header>
-
-  <!-- ✅ Top horizontal navigation -->
-  <div class="menu">
-    <a href="{{ url_for('main.dashboard') }}">Home</a>
-    <a href="#">Listings</a>
-    <a href="{{ url_for('main.create_group') }}">Groups</a>
-    <a href="{{ url_for('auth.message') }}">Messages</a>
-  </div>
-
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <ul class="flashes">
-        {% for category, message in messages %}
-          <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
   {% if current_user.is_authenticated %}
     <div class="user-area">
       <a href="{{ url_for('main.profile') }}" class="user-info">
@@ -120,10 +163,10 @@
 
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><type="button" class="btn btn-primary"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><type="button" class="btn btn-primary"> Profile </button></a>
+    <a href="{{ url_for('main.create_group') }}"><type="button" class="btn btn-primary"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><type="button" class="btn btn-primary">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
@@ -131,22 +174,34 @@
     </button></a>
 
   </div>
-
+ <h1>Create a New Study Group</h1>
+  <div class="createagroup">
+    <div class="container mt-3">
+  <div class="toast show"">
+    <div class="toast-header">
+      <strong class="me-auto">*Required </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body">
+      <p>All fields must be completed when you create a new group.</p>
+    </div>
+  </div>
+</div>
   <!-- 1) Make sure action points at the route, method is POST -->
   <form method="POST" action="{{ url_for('main.create_group') }}">
     <!-- 2) Hidden field for CSRF token (required by FlaskForm) -->
     {{ form.hidden_tag() }}
 
-      <div>
+      <div class="subject">
         {{ form.subject.label }}<br>
-        {{ form.subject(size=30) }}<br>
+        {{ form.subject(placeholder="Enter your desired subject", size=30) }}<br>
         {% for err in form.subject.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}
       </div>
 
     <!-- 4) Meeting time field + errors -->
-    <div>
+    <div class="date">
       {{ form.meet_time.label }}<br>
       {{ form.meet_time(type="datetime-local") }}<br>
       {% for err in form.meet_time.errors %}
@@ -154,36 +209,37 @@
       {% endfor %}
     </div>
 
-      <div>
+      <div class="location">
         {{ form.location.label }}<br>
-        {{ form.location(size=40) }}<br>
+        {{ form.location(placeholder="Enter your location or link", size=40) }}<br>
         {% for err in form.location.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}
       </div>
 
-      <div>
+      <div class="groupname">
         {{ form.name.label }}<br>
-        {{ form.name(size=40) }}<br>
+        {{ form.name(placeholder="Enter your group name", size=40) }}<br>
         {% for err in form.name.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}
       </div>
 
-      <div>
+      <div class="description">
         {{ form.description.label }}<br>
-        {{ form.description(rows=4, cols=40) }}<br>
+        {{ form.description(placeholder="Add any additional information!", rows=4, cols=40) }}<br>
         {% for err in form.description.errors %}
           <span class="error">{{ err }}</span>
         {% endfor %}
       </div>
 
     <!-- 8) Submit button -->
-    <div>
-      {{ form.submit(class="btn") }}
+    <div class="create">
+      {{ form.submit(class="btn btn-success") }}
     </div>
+  </div>
   </form>
 
-  <p><a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a></p>
+  <p><a href="{{ url_for('main.dashboard') }}"><button class="btn btn-primary">← Back to Dashboard</button></a></p>
 </body>
 </html>

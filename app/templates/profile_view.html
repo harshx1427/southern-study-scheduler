@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}{{ user.name }}'s Profile{% endblock %}
-
+    <title>Profile View | SCSU Study Group Finder</title>
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
   <div class="profile-container" style="
     max-width: 600px;
     margin: 60px auto;

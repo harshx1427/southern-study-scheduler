@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Message</title>
+  <title>Messages | SCSU Study Group Finder</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <style>
     body {
       display: flex;
@@ -11,6 +12,7 @@
       font-family: sans-serif;
       margin: 0;
       padding: 20px;
+      
     }
 
     .menu {
@@ -89,14 +91,17 @@
       gap: 40px;
       width: 100%;
       max-width: 1200px;
+      height: 400px;
+      margin-top: 100px;
     }
 
     .flex-box {
       flex: 1;
       background-color: #f5f5f5;
-      padding: 15px;
+      padding: 35px;
+      border: 1px solid gray;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: #111 0px 5px 10px;
       min-height: 300px;
     }
 
@@ -105,6 +110,10 @@
 </head>
 
 <body>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">  
+  <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
   {% if current_user.is_authenticated %}
     <div class="user-area">
       <a href="{{ url_for('main.profile') }}" class="user-info">
@@ -121,10 +130,10 @@
 
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><type="button" class="btn btn-primary"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><type="button" class="btn btn-primary"> Profile </button></a>
+    <a href="{{ url_for('main.view_my_groups') }}"><type="button" class="btn btn-primary"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><type="button" class="btn btn-primary">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
@@ -133,27 +142,29 @@
 
   </div>
 
-  <h1>Message Board</h1>
+  <h2> Message Board </h2>
 
 <div class="flex-container">
 
   <!-- Left box: Recent Conversations + Search -->
   <div class="flex-box">
+    <div class="recentheader">
     <h3>Recent Conversations</h3>
-    <ul>
+    </div>
+   
       {% for user, unread in recent_contacts %}
-        <li>
-          <a href="{{ url_for('auth.message_user', user_id=user.id) }}"><button>
+        <p>
+          <a href="{{ url_for('auth.message_user', user_id=user.id) }}"><button class="btn btn-info">
             {{ user.name }}
             {% if unread > 0 %}
               <span class="notif-dot"></span>
             {% endif %}
-          </button></a>
-        </li>
+          </button></a></p>
+        
       {% else %}
-        <li>No recent conversations</li>
+        <p>No recent conversations</p>
       {% endfor %}
-    </ul>
+    </p>
 
     <!-- Search bar goes inside left box -->
     <form method="GET" action="{{ url_for('auth.message') }}">
@@ -163,7 +174,7 @@
         placeholder="Search users..."
         autocomplete="off">
       <div id="suggestions" style="border: 1px solid #ccc; display: none;"></div>
-      <button type="submit">Search</button>
+      <button type="submit"class="btn btn-secondary">Search</button>
     </form>
 
   </div>
@@ -171,13 +182,13 @@
   <!-- Right box: Sent messages -->
   <div class="flex-box">
     <h3>Your Sent Messages</h3>
-    <ul>
+    <p>
       {% for msg in messages %}
-        <li>
+        <p>
           To {{ msg.receiver.name }}: {{ msg.content }} <em>({{ msg.posted_at.strftime('%Y-%m-%d %H:%M') }})</em>
-        </li>
+        </p>
       {% endfor %}
-    </ul>
+    </p>
   </div>
 
 </div>
@@ -212,6 +223,7 @@
     });
 
   </script>
-
+<br>
+  <a href="{{ url_for('main.dashboard') }}"><button class="btn btn-primary">← Back to Dashboard</button></a>
 </body>
 </html>

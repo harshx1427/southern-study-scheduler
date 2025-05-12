@@ -1,16 +1,17 @@
 {% extends "base.html" %}
-{% block title %}{{ thread.title }}{% endblock %}
-
+{% block title %}{{ thread.title }} | SCSU Study Group Finder{% endblock %}
+    
 {% block content %}
+ <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
   <a href="{{ url_for('main.view_group', group_id=group.id) }}">
-    <button>← Back to {{ group.name }}</button>
+    <button class="btn btn-primary">← Back to {{ group.name }}</button>
   </a>
 
   <h2>{{ thread.title }}</h2>
 
-  <div class="replies">
+  <div class="replies chat-box" style="max-height: 400px; overflow-y: auto; border: 1px solid rgb(144, 201, 255); border-radius: 8px; box-shadow: #111 0px 1px 5px; padding: 20px; background-color: rgb(149, 205, 255);">
     {% for m in messages %}
-      <div class="reply">
+      <div class="reply" style="margin-bottom: 20px; background-color: rgb(255, 255, 255); border-radius: 8px;">
         <p>{{ m.content }}</p>
         <p class="metadata">
           <span class="author">
@@ -25,14 +26,25 @@
     {% endfor %}
   </div>
 
+
+
   {% if is_member %}
     <hr>
     <form method="POST"
           action="{{ url_for('threads.view_thread', group_id=group.id, thread_id=thread.id) }}">
       {{ form.hidden_tag() }}
       {{ form.content.label }}<br>
-      {{ form.content(rows=3, cols=50) }}<br><br>
-      {{ form.submit(value='Post Reply') }}
+      {{ form.content(rows=5, cols=50) }}<br><br>
+      {{ form.submit(class="btn btn-primary", value='Post Reply') }}
     </form>
   {% endif %}
+
+  <script>
+    const chatBox = document.querySelector('.chat-box');
+    if (chatBox) {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+
 {% endblock %}

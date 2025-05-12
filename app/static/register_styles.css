@@ -15,7 +15,7 @@ body {
 
 
 form{
-  font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif, sans-serif;
   text-align: center;
 }
 .register{
@@ -24,7 +24,8 @@ form{
     height: 350px;
     padding: 10px;
     background-color: #fff;
-    border: 5px solid gray;
+    border: 1px solid gray;
+    border-radius: 8px;
     margin-left: 700px;
     margin-top: 300px;
     box-shadow: #111 0px 5px 10px;
@@ -38,7 +39,7 @@ form{
 .form2 {
             margin: 10px 0;
             text-align: center;
-            margin-right: 70px;
+            margin-right: 67px;
         }
  
 .form3 {

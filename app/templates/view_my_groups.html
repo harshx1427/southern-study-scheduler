@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}My Groups | SCSU Study Group Finder{% endblock %}
+    <
+{% block content %}
+  
+<body>
+
+  
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='viewgroupstyles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+
+    <h2 style="text-align: center;">My Study Groups</h2>
+    <!-- Left: Created Groups -->
+
+
+    <div class="createdgrouphead">
+      <h3>Groups Created</h3>
+      </div>
+      {% if created_groups %}
+        <div class="createdgroup">
+        <p style="list-style: none; padding-left: 0; margin-top: 0px;">
+          {% for group in created_groups %}
+            <p style="margin-bottom: 10px;">
+              <a href="{{ url_for('main.view_group', group_id=group.id) }}">
+                <button class="btn btn-primary">{{ group.name }}</button>
+              </a>
+            </p>
+          {% endfor %}
+        </p>
+        </div>
+      {% else %}
+        <div class="creategrouptext">
+        <p style="margin-left: 150px; margin-top: 70px;">No groups created yet.<br>
+           Want to create a group?
+           <a href="{{ url_for('main.create_group') }}">
+            <div class="creategroupbutton">
+             <button class="btn btn-primary">Create A Group</button>
+             </div>
+           </a>
+        </p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Right: Joined Groups -->
+    <div class="joinedgrouphead">
+      <h3>Groups Joined</h3>
+    </div>
+          <div class="joinedgroup">
+      {% if joined_groups %}
+        <p style="list-style: none; padding-left: 0;">
+      
+          {% for group in joined_groups %}
+            <p style="margin-bottom: 10px;">
+              <a href="{{ url_for('main.view_group', group_id=group.id) }}">
+                <button class="btn btn-primary">{{ group.name }}</button>
+              </a>
+            </p>
+          {% endfor %}
+        </p>
+      {% else %}
+      </div>
+        <div class="joingrouptextno">
+        <p>No groups joined yet.<br>
+           Want to join a group?
+           <a href="{{ url_for('main.dashboard') }}">
+            <div class="findgroupbutton">
+             <type="button" class="btn btn-primary">Find A Group</button>
+            </div>
+           </a>
+        </p>
+        </div>
+
+      {% endif %}
+    </div>
+
+  </div>
+
+  <br>
+  <a href="{{ url_for('main.dashboard') }}"><button class="btn btn-primary">← Back to Dashboard</button></a>
+{% endblock %}
+</body>

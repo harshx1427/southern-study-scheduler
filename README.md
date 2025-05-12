@@ -3,7 +3,6 @@
 The Southern Study Group Scheduler helps SCSU students easily find and join study groups based on subjects and schedules. It creates a supportive space for collaboration while keeping everything organized for both students and admins.
 
 ## Features
-
 Student registration and login
 Create and manage study groups
 Join or leave groups
@@ -12,10 +11,8 @@ Admin dashboard to manage user listings
 
 ## Technology used
 
-Python (Flask)
-Html, CSS, JavaScript
-SQL
-Bootstrap
+Python (Flask),
+HTML, CSS, JavaScript, JQuery, SQL, and Bootstrap
 
 
 ## Installation
@@ -28,13 +25,33 @@ git clone https://github.com/harshx1427/southern-study-scheduler.git
 pip download python flask
 
 
-## Trouble Shooting
+## Troubleshooting
 Flask App Not Running
 **Error:** `flask: command not found`  
 **Fix:** Make sure Flask is installed and your virtual environment is activated:
 ```bash
-pip install Flask
 source venv/bin/activate
+pip install Flask
+```
+## License
+[MIT License](https://opensource.org/license/mit)
 
-## liscence
-SCSU
+Copyright (c) [2025] [Southen Connecticut State University]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
