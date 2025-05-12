@@ -36,4 +36,4 @@ source venv/bin/activate
 pip install Flask
 
 ## liscence
-SCSU
+[SCSU] (https://www.southernct.edu/)
