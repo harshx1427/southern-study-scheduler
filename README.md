@@ -12,7 +12,7 @@ Admin dashboard to manage user listings
 ## Technology used
 
 Python (Flask)
-Html, CSS, JavaScript
+HTML, CSS, JavaScript
 SQL
 Bootstrap
 
@@ -27,13 +27,13 @@ git clone https://github.com/harshx1427/southern-study-scheduler.git
 pip download python flask
 
 
-## Trouble Shooting
+## Troubleshooting
 Flask App Not Running
 **Error:** `flask: command not found`  
 **Fix:** Make sure Flask is installed and your virtual environment is activated:
 ```bash
 source venv/bin/activate
 pip install Flask
-
+```
 ## liscence
 [SCSU] (https://www.southernct.edu/)
