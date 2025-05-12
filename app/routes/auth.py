@@ -54,6 +54,13 @@ def register():
 
     form = RegistrationForm()
     if form.validate_on_submit():
+        # **check for duplicate email first**
+        if User.query.filter_by(southern_email=form.southern_email.data).first():
+            flash("This email is already in use.", "warning")
+            # re‑render the form with that flash; no HTML changes needed
+            return render_template('register.html', form=form)
+
+        # otherwise proceed with user creation
         hashed_password = generate_password_hash(form.password.data)
         new_user = User(
             southern_email=form.southern_email.data,
@@ -62,6 +69,9 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
+
+        flash('Your account has been created! Please log In.', 'success_create')
+        return redirect(url_for('auth.login'))
 
         # This will be the message the app send, when user register
         '''send_email(
