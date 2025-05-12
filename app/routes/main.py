@@ -9,11 +9,11 @@ from wtforms.fields import DateTimeLocalField
 
 
 class StudyGroupForm(FlaskForm):
-    subject = StringField('Course/Subject', validators=[DataRequired(),Length(max=50)])
-    meet_time = DateTimeLocalField('Meeting Date & Time', format='%Y-%m-%dT%H:%M', validators=[DataRequired()])
-    location = StringField('Location or Link', validators=[DataRequired(), Length(max=200)])
-    name = StringField('Group Name', validators=[DataRequired(), Length(max=100)])
-    description = TextAreaField('Description', validators=[DataRequired(), Length(max=500)])
+    subject = StringField('*Course/Subject', validators=[DataRequired(),Length(max=50)])
+    meet_time = DateTimeLocalField('*Meeting Date & Time', format='%Y-%m-%dT%H:%M', validators=[DataRequired()])
+    location = StringField('*Location or Link', validators=[DataRequired(), Length(max=200)])
+    name = StringField('*Group Name', validators=[DataRequired(), Length(max=100)])
+    description = TextAreaField('*Description', validators=[DataRequired(), Length(max=500)])
     submit = SubmitField('Create Group')
 
 
@@ -108,7 +108,7 @@ def join_group(group_id):
     db.session.add(new_membership)
     try:
         db.session.commit()
-        flash(f'You joined "{group.name}"', f'join_success_{group.id}')
+        flash(f'You joined {group.name}!', f'join_success_{group.id}')
     except:
         db.session.rollback()
         flash('Could not join (already a member?)', 'warning')
@@ -125,9 +125,9 @@ def leave_group(group_id):
     if membership:
         db.session.delete(membership)
         db.session.commit()
-        flash(f'You left "{group.name}"', f'leave_success_{group.id}')
+        flash(f'You have left {group.name}.', f'leave_success_{group.id}')
     else:
-        flash('You are not a member of this group', 'warning')
+        flash('You are not a member of this group.', 'warning')
     return redirect(url_for('main.dashboard'))
 
 

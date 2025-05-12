@@ -1,0 +1,100 @@
+h1{
+    text-align: center;
+    margin-left: 520px;
+    
+}
+h3{
+    text-align: center;
+}
+
+.createdgrouphead{
+    position: fixed;
+    width: 320px;
+    height: 60px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: 140px;
+    margin-top: 130px;
+    box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
+
+.createdgroup{
+ position: fixed;
+    width: 520px;
+    height: 350px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: 40px;
+    margin-top: 207px;
+    box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
+.creategrouptext{
+      position: fixed;
+    margin-left: 950px;
+    margin-top: 200px;
+}
+
+.joinedgrouphead{
+    position: fixed;
+    width: 320px;
+    height: 60px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: 810px;
+    margin-top: 295px;
+    box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
+
+.joinedgroup{
+ position: fixed;
+    width: 520px;
+    height: 350px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: 800px;
+    margin-top: 370px;
+    box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
+.joingrouptext{
+    position: fixed;
+    margin-left: 950px;
+    margin-top: 250px;
+}
+
+.findgroupbutton{
+    position: fixed;
+    margin-left: 50px;
+    margin-bottom: 100px;
+}

@@ -2,7 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Create an Account </title>
+    <title>Create an Account | SCSU Study Group Finder</title>
+          <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
  </head>
  <body>
 
@@ -12,10 +13,11 @@
 
     <!-- user is creating their study group finder account -->
    <div class="register justify-content-center">
-    <br>
+    <div class="text-left">
+        <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
    <form method="POST" class="form-container">
+    {{ form.hidden_tag() }}
     <div class="form1">
-            {{ form.hidden_tag() }}
             {{ form.name.label }}
             {{ form.name() }}
         </div>
@@ -33,11 +35,8 @@
         <div class="form4">
             {{ form.confirm_password.label }}
             {{ form.confirm_password() }}
-            {{ form.submit(type="submit", class="btn btn-primary") }}
         </div>
 
-<br>
-    </form>
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <ul class="flashes">
@@ -50,11 +49,16 @@
     {% endif %}
   {% endwith %}
 
-    <a href="{{ url_for('main.index') }}"><button>← Back to Main</button></a>
+  <button type="submit" class="btn btn-primary"> Register </button> 
+</form>
 
-    <br>
-    <script>
-
+</div>
+ <script>
+        function accountButton() {
+            document.getElementById("accountButton").onclick = function() {
+                window.location.href = "/register";
+            };
+        }
     </script>
  </body>
 </html>
