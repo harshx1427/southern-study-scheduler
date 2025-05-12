@@ -8,9 +8,9 @@
 
   <h2>{{ thread.title }}</h2>
 
-  <div class="replies">
+  <div class="replies chat-box" style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
     {% for m in messages %}
-      <div class="reply">
+      <div class="reply" style="margin-bottom: 15px;">
         <p>{{ m.content }}</p>
         <p class="metadata">
           <span class="author">
@@ -25,6 +25,8 @@
     {% endfor %}
   </div>
 
+
+
   {% if is_member %}
     <hr>
     <form method="POST"
@@ -35,4 +37,13 @@
       {{ form.submit(value='Post Reply') }}
     </form>
   {% endif %}
+
+  <script>
+    const chatBox = document.querySelector('.chat-box');
+    if (chatBox) {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+
 {% endblock %}

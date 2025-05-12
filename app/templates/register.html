@@ -9,11 +9,13 @@
    <link rel="stylesheet" href="{{ url_for('static', filename='register_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+
     <!-- user is creating their study group finder account -->
    <div class="register justify-content-center">
     <br>
    <form method="POST" class="form-container">
     <div class="form1">
+            {{ form.hidden_tag() }}
             {{ form.name.label }}
             {{ form.name() }}
         </div>
@@ -31,14 +33,28 @@
         <div class="form4">
             {{ form.confirm_password.label }}
             {{ form.confirm_password() }}
+            {{ form.submit(type="submit", class="btn btn-primary") }}
         </div>
 
 <br>
-  <button type="submit" class="btn btn-primary"> Register </button>
     </form>
-</div>
-<div class="text-center">
-      <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
-      </div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          {% if category == 'warning' %}
+            <p class="{{ category }}">{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+    <a href="{{ url_for('main.index') }}"><button>← Back to Main</button></a>
+
+    <br>
+    <script>
+
+    </script>
  </body>
 </html>

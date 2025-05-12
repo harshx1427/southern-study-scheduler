@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}My Groups{% endblock %}
+
+{% block content %}
+  <h1>My Study Groups</h1>
+
+  <div style="display: flex; justify-content: space-between; gap: 40px; align-items: flex-start;">
+
+    <!-- Left: Created Groups -->
+    <div style="flex: 1; border: 1px solid #ccc; padding: 15px; background-color: #f9f9f9;">
+      <h3>Groups I Created</h3>
+      {% if created_groups %}
+        <ul style="list-style: none; padding-left: 0;">
+          {% for group in created_groups %}
+            <li style="margin-bottom: 10px;">
+              <a href="{{ url_for('main.view_group', group_id=group.id) }}">
+                <button>{{ group.name }}</button>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+
+        <p>No groups created yet.<br>
+           Want to create a group?
+           <a href="{{ url_for('main.create_group') }}">
+             <button>Create Group</button>
+           </a>
+        </p>
+
+      {% endif %}
+    </div>
+
+    <!-- Right: Joined Groups -->
+    <div style="flex: 1; border: 1px solid #ccc; padding: 15px; background-color: #f9f9f9;">
+      <h3>Groups I Joined</h3>
+      {% if joined_groups %}
+        <ul style="list-style: none; padding-left: 0;">
+          {% for group in joined_groups %}
+            <li style="margin-bottom: 10px;">
+              <a href="{{ url_for('main.view_group', group_id=group.id) }}">
+                <button>{{ group.name }}</button>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+
+        <p>No groups joined yet.<br>
+           Want to join a group?
+           <a href="{{ url_for('main.dashboard') }}">
+             <button>Find a Group</button>
+           </a>
+        </p>
+
+      {% endif %}
+    </div>
+
+  </div>
+
+  <br>
+  <a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a>
+{% endblock %}
