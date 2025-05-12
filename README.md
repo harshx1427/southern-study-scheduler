@@ -19,7 +19,7 @@ HTML, CSS, JavaScript, JQuery, SQL, and Bootstrap
 
 Clone repository
 
-'''bash
+bash
 git clone https://github.com/harshx1427/southern-study-scheduler.git
 
 pip download python flask
