@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Study Group</title>
 
   <style>
@@ -84,7 +84,14 @@
     <h1>Create a New Study Group</h1>
   </header>
 
-  <!-- Flash messages (e.g. after commit) -->
+  <!-- ✅ Top horizontal navigation -->
+  <div class="menu">
+    <a href="{{ url_for('main.dashboard') }}">Home</a>
+    <a href="#">Listings</a>
+    <a href="{{ url_for('main.create_group') }}">Groups</a>
+    <a href="{{ url_for('auth.message') }}">Messages</a>
+  </div>
+
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <ul class="flashes">
@@ -130,14 +137,13 @@
     <!-- 2) Hidden field for CSRF token (required by FlaskForm) -->
     {{ form.hidden_tag() }}
 
-    <!-- 3) Subject field + errors -->
-    <div>
-      {{ form.subject.label }}<br>
-      {{ form.subject(size=30) }}<br>
-      {% for err in form.subject.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.subject.label }}<br>
+        {{ form.subject(size=30) }}<br>
+        {% for err in form.subject.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
     <!-- 4) Meeting time field + errors -->
     <div>
@@ -148,32 +154,29 @@
       {% endfor %}
     </div>
 
-    <!-- 5) Location field + errors -->
-    <div>
-      {{ form.location.label }}<br>
-      {{ form.location(size=40) }}<br>
-      {% for err in form.location.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.location.label }}<br>
+        {{ form.location(size=40) }}<br>
+        {% for err in form.location.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
-    <!-- 6) Name field + errors -->
-    <div>
-      {{ form.name.label }}<br>
-      {{ form.name(size=40) }}<br>
-      {% for err in form.name.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.name.label }}<br>
+        {{ form.name(size=40) }}<br>
+        {% for err in form.name.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
-    <!-- 7) Description field + errors -->
-    <div>
-      {{ form.description.label }}<br>
-      {{ form.description(rows=4, cols=40) }}<br>
-      {% for err in form.description.errors %}
-        <span class="error">{{ err }}</span>
-      {% endfor %}
-    </div>
+      <div>
+        {{ form.description.label }}<br>
+        {{ form.description(rows=4, cols=40) }}<br>
+        {% for err in form.description.errors %}
+          <span class="error">{{ err }}</span>
+        {% endfor %}
+      </div>
 
     <!-- 8) Submit button -->
     <div>
@@ -184,4 +187,3 @@
   <p><a href="{{ url_for('main.dashboard') }}"><button>← Back to Dashboard</button></a></p>
 </body>
 </html>
-
