@@ -177,8 +177,10 @@ def profile_view(user_id):
 def delete_group(group_id):
     group = StudyGroup.query.get_or_404(group_id)
     if group.created_by_id != current_user.id:
-        abort(403)
+        flash("You are not authorized to delete this group.", "warning")
+        return redirect(url_for('main.dashboard', group_id=group_id))
+
     db.session.delete(group)
     db.session.commit()
-    flash('Study group deleted.', 'success')
+    flash('Study group deleted.', 'success_deleted')
     return redirect(url_for('main.dashboard'))

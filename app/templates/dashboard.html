@@ -119,7 +119,7 @@
    <div class="alert" role="alert">
       <p class="flashes"> 
         {% for category, message in messages %}
-          {% if category == 'group_success' or category == 'warning' %}
+          {% if category == 'group_success' or category == 'warning' or category == 'success_deleted'%}
           <div class="alert alert-success createsuccess fadeout">
             <p class="{{ category }}">{{ message }}</p>
             </div>
