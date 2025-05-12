@@ -25,6 +25,7 @@
       width: 90%;
       max-width: 600px;
       text-align: left;
+      
     }
 
     .chat-box {
@@ -34,6 +35,9 @@
       padding: 10px;
       margin-bottom: 15px;
       background: #f0f0f0;
+      border: 2px solid rgb(255, 255, 255);
+      border-radius: 8px;
+      box-shadow: #111 0px 5px 10px;
     }
 
     .chat-box ul {
@@ -101,11 +105,11 @@
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <ul class="flashes">
+        <p class="flashes">
           {% for category, message in messages %}
             <li class="{{ category }}">{{ message }}</li>
           {% endfor %}
-        </ul>
+        </p>
       {% endif %}
     {% endwith %}
 
@@ -114,7 +118,7 @@
       <ul>
         {% for m in messages %}
           <li style="text-align: {% if m.sender_id == current_user.id %}right{% else %}left{% endif %};">
-            <div style="display: inline-block; background-color: {% if m.sender_id == current_user.id %}#d0f0c0{% else %}#f0f0f0{% endif %}; padding: 8px 12px; border-radius: 10px; max-width: 70%;">
+            <div style="display: inline-block; background-color: {% if m.sender_id == current_user.id %}#a7c6ff{% else %} #d0f0c0 {% endif %}; padding: 8px 12px; border-radius: 10px; max-width: 70%;">
               <strong>{{ 'You' if m.sender_id == current_user.id else m.sender.name }}:</strong><br>
               {{ m.content }}<br>
               <em style="font-size: 0.8em; color: #666;">{{ m.posted_at.strftime('%Y-%m-%d %H:%M') }}</em>

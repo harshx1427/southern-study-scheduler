@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Create an Account | SCSU Study Group Finder</title>
+    <title>Create an Account | SCSU Study Group Finder</title>
           <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
  </head>
  <body>
@@ -16,10 +16,31 @@
         <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
    <form method="POST" class="form-container">
     {{ form.hidden_tag() }}
-    {{ form.name.label }} {{ form.name() }}<br>
-    {{ form.southern_email.label }} {{ form.southern_email() }} <br>
-    {{ form.password.label }} {{ form.password() }}<br>
-    {{ form.confirm_password.label }} {{ form.confirm_password() }}<br>
+    <div class="form1">
+    {{ form.name.label }} {{ form.name() }}
+    </div>
+    <div class="form2">
+    {{ form.southern_email.label }} {{ form.southern_email() }}
+    </div>
+    <div class="form3">
+    {{ form.password.label }} {{ form.password() }}
+    </div>
+    <div class="form4">
+    {{ form.confirm_password.label }} {{ form.confirm_password() }}
+    </div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          {% if category == 'warning' %}
+            <p class="{{ category }}">{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
   <button type="submit" class="btn btn-primary"> Register </button> 
 </form>
 

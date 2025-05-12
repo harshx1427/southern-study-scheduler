@@ -117,15 +117,15 @@
 <div>  {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
    <div class="alert" role="alert">
-      <ul class="flashes"> 
+      <p class="flashes"> 
         {% for category, message in messages %}
           {% if category == 'group_success' or category == 'warning' %}
-          <div class="alert-success createsuccess" >
-            <li class="{{ category }}">{{ message }}</li>
+          <div class="alert alert-success createsuccess fadeout">
+            <p class="{{ category }}">{{ message }}</p>
             </div>
           {% endif %}
         {% endfor %}
-      </ul>
+      </p>
     {% endif %}
   {% endwith %}
   </div>

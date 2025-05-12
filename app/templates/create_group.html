@@ -78,7 +78,7 @@
     .createagroup {
       position: fixed;
     width: 520px;
-    height: 550px;
+    height: 600px;
     padding: 10px;
     background-color: #fff;
     border: 1px solid gray;
@@ -176,6 +176,17 @@
   </div>
  <h1>Create a New Study Group</h1>
   <div class="createagroup">
+    <div class="container mt-3">
+  <div class="toast show"">
+    <div class="toast-header">
+      <strong class="me-auto">*Required </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body">
+      <p>All fields must be completed when you create a new group.</p>
+    </div>
+  </div>
+</div>
   <!-- 1) Make sure action points at the route, method is POST -->
   <form method="POST" action="{{ url_for('main.create_group') }}">
     <!-- 2) Hidden field for CSRF token (required by FlaskForm) -->

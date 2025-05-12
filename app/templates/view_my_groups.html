@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}My Groups{% endblock %}
-
+{% block title %}My Groups | SCSU Study Group Finder{% endblock %}
+    <
 {% block content %}
   
 <body>
@@ -20,15 +20,15 @@
       </div>
       {% if created_groups %}
         <div class="createdgroup">
-        <ul style="list-style: none; padding-left: 0; margin-top: 0px;">
+        <p style="list-style: none; padding-left: 0; margin-top: 0px;">
           {% for group in created_groups %}
-            <li style="margin-bottom: 20px;">
+            <p style="margin-bottom: 10px;">
               <a href="{{ url_for('main.view_group', group_id=group.id) }}">
                 <button class="btn btn-primary">{{ group.name }}</button>
               </a>
-            </li>
+            </p>
           {% endfor %}
-        </ul>
+        </p>
         </div>
       {% else %}
         <div class="creategrouptext">
@@ -48,16 +48,16 @@
     </div>
           <div class="joinedgroup">
       {% if joined_groups %}
-        <ul style="list-style: none; padding-left: 0;">
+        <p style="list-style: none; padding-left: 0;">
       
           {% for group in joined_groups %}
-            <li style="margin-bottom: 10px;">
+            <p style="margin-bottom: 10px;">
               <a href="{{ url_for('main.view_group', group_id=group.id) }}">
                 <button class="btn btn-primary">{{ group.name }}</button>
               </a>
-            </li>
+            </p>
           {% endfor %}
-        </ul>
+        </p>
       {% else %}
       </div>
         <div class="joingrouptext">

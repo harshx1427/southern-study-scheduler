@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}{{ thread.title }}{% endblock %}
-
+{% block title %}{{ thread.title }} | SCSU Study Group Finder{% endblock %}
+    
 {% block content %}
  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
   <a href="{{ url_for('main.view_group', group_id=group.id) }}">

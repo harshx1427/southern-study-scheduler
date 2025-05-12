@@ -151,20 +151,20 @@
     <div class="recentheader">
     <h3>Recent Conversations</h3>
     </div>
-    <ul>
+   
       {% for user, unread in recent_contacts %}
-        <li>
+        <p>
           <a href="{{ url_for('auth.message_user', user_id=user.id) }}"><button class="btn btn-info">
             {{ user.name }}
             {% if unread > 0 %}
               <span class="notif-dot"></span>
             {% endif %}
-          </button></a>
-        </li>
+          </button></a></p>
+        
       {% else %}
-        <li>No recent conversations</li>
+        <p>No recent conversations</p>
       {% endfor %}
-    </ul>
+    </p>
 
     <!-- Search bar goes inside left box -->
     <form method="GET" action="{{ url_for('auth.message') }}">
@@ -182,13 +182,13 @@
   <!-- Right box: Sent messages -->
   <div class="flex-box">
     <h3>Your Sent Messages</h3>
-    <ul>
+    <p>
       {% for msg in messages %}
-        <li>
+        <p>
           To {{ msg.receiver.name }}: {{ msg.content }} <em>({{ msg.posted_at.strftime('%Y-%m-%d %H:%M') }})</em>
-        </li>
+        </p>
       {% endfor %}
-    </ul>
+    </p>
   </div>
 
 </div>

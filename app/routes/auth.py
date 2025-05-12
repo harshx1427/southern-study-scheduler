@@ -54,6 +54,11 @@ def register():
 
     form = RegistrationForm()
     if form.validate_on_submit():
+        if User.query.filter_by(southern_email=form.southern_email.data).first():
+            flash("This email is already in use.", "warning")
+            # re‑render the form with that flash; no HTML changes needed
+            return render_template('register.html', form=form)
+        
         hashed_password = generate_password_hash(form.password.data)
         new_user = User(
             southern_email=form.southern_email.data,

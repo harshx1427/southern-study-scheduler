@@ -1,13 +1,13 @@
 {% extends "base.html" %}
-{% block title %}{{ group.name }}{% endblock %}
-
+{% block title %}{{ group.name }} | SCSU Study Group Finder{% endblock %}
 {% block content %}
+<title>View Group | SCSU Study Group Finder</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
   <div class="page-header">
     <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">← Back to Dashboard</a>
   </div>
 
-  <div class="group-layout" style="max-height: 600px; overflow-y: auto; margin: 25px; border: 2px solid rgb(255, 255, 255); border-radius: 8px; background-color: aliceblue; box-shadow: #111 0px 5px 10px;">
+  <div class="group-layout" style="padding: 30px; max-height: 1000px; overflow-y: auto; margin: 25px; border: 2px solid rgb(255, 255, 255); border-radius: 8px; background-color: aliceblue; box-shadow: #111 0px 5px 10px;">
     <!-- Main Group Info -->
     <section class="group-main">
       <h2>{{ group.name }}</h2>
@@ -43,15 +43,15 @@
 
           <h3>Posts</h3>
           {% if group.forums %}
-            <ul class="post-list">
+            <p class="post-list">
               {% for thread in group.forums %}
-                <li>
-                  <a href="{{ url_for('threads.view_thread', group_id=group.id, thread_id=thread.id) }}" class="post-link">
+                <p>
+                  <a href="{{ url_for('threads.view_thread', group_id=group.id, thread_id=thread.id) }}" class="post-pnk">
                     {{ thread.title }}
                   </a>
-                </li>
+                </p>
               {% endfor %}
-            </ul>
+            </p>
           {% else %}
             <p class="muted">No posts yet.</p>
           {% endif %}
@@ -71,17 +71,17 @@
       <p><strong>Members:</strong> {{ group.memberships|length }}</p>
 
       <h4>Members</h4>
-      <ul class="member-list">
+      <p class="member-list">
         {% for m in group.memberships %}
           {% if m.user.id != group.creator.id %}
-            <li>
+            <p>
               <a href="{{ url_for('main.profile_view', user_id=m.user.id, group_id=group.id) }}">
                 {{ m.user.name }}
               </a>
-            </li>
+            </p>
           {% endif %}
         {% endfor %}
-      </ul>
+      </p>
     </aside>
   </div>
 {% endblock %}
