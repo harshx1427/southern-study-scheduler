@@ -33,8 +33,8 @@ Flask App Not Running
 **Error:** `flask: command not found`  
 **Fix:** Make sure Flask is installed and your virtual environment is activated:
 ```bash
-pip install Flask
 source venv/bin/activate
+pip install Flask
 
 ## liscence
 SCSU
