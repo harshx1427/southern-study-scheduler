@@ -36,8 +36,6 @@ pip install Flask
 ## License
 [MIT License](https://opensource.org/license/mit)
 
-MIT License
-
 Copyright (c) [2025] [Southen Connecticut State University]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
