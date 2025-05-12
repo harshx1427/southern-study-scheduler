@@ -1,0 +1,234 @@
+/* message_user_styles.css - updated styling */
+
+/* Global body setup */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f4f8;
+  padding-top: 60px;
+}
+
+/* Top menu bar */
+.menu {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+  background-color: #007bff; /* Blue background */
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;              /* ensures it stretches all the way across */
+  height: 40px;          /* pick a height */
+  z-index: 1000;         /* sit on top of everything else */
+}
+.menu a {
+  margin: 0 10px;
+  text-decoration: none;
+}
+.menu button {
+  background-color: #ffffff;
+  color: #007bff;
+  border: 2px solid #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.menu button:hover {
+  background-color: #0056b3;
+  color: #ffffff;
+  border-color: #0056b3;
+}
+
+/* User info area */
+.user-area {
+  position: fixed;
+  top: 7px; /* inside that 60px header—tweak as needed */
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 6px 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);             
+  z-index: 1001;         /* above the .menu */
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #333;
+}
+.user-info:hover {
+  color: #0056b3;
+}
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.logout-button {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+/* Chat container */
+.chat-container {
+  width: 90%;
+  max-width: 600px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+.chat-container h1,
+.chat-container h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* Flash messages */
+.flashes li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+.flashes .success {
+  color: #28a745;
+}
+.flashes .danger {
+  color: #dc3545;
+}
+
+/* Conversation box */
+.chat-box {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+.chat-box ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.chat-box li {
+  margin-bottom: 10px;
+}
+
+/* Alignment for messages */
+.sent    { text-align: right; }
+.received{ text-align: left;  }
+
+/* Message bubble styling */
+.bubble {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 20px;
+  max-width: 70%;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+.sent .bubble {
+  background-color: #d0f0c0;
+}
+.received .bubble {
+  background-color: #f0f0f0;
+}
+.timestamp {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Form styling */
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+form button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Back link styling */
+a.button-back {
+  display: inline-block;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+a.button-back:hover {
+  text-decoration: underline;
+}
+
+/* style the “Send” button in your form */
+form button,
+form input[type="submit"] {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 7px 0 0 0;
+  transition: background 0.2s;
+}
+
+/* style the “← Back to Message” button */
+.chat-container + a button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  transition: background 0.2s;
+}
+.chat-container + a button:hover {
+  background-color: #5a6268;
+}

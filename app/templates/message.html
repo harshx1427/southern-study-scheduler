@@ -3,105 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Message</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .menu {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .notif-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background: red;
-      border-radius: 50%;
-      margin-left: 5px;
-      vertical-align: middle;
-      }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      color: #333;
-    }
-
-    .user-info:hover {
-      color: #007bff;
-    }
-
-    .user-avatar {
-      width: 28px;
-      height: 28px;
-      background-color: #007bff;
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 28px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .user-area {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background-color: #f3f3f3;
-      padding: 6px 10px;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    }
-
-    .logout-button {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-      display: inline-block;
-    }
-
-    .logout-button:hover {
-      background-color: #c82333;
-      text-decoration: none;
-    }
-
-    .flex-container {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      width: 100%;
-      max-width: 1200px;
-    }
-
-    .flex-box {
-      flex: 1;
-      background-color: #f5f5f5;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      min-height: 300px;
-    }
-
-  </style>
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='message_styles.css') }}">
 </head>
 
 <body>
@@ -119,19 +21,19 @@
     </div>
   {% endif %}
 
-  <div class="menu">
+<div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><button class="menu-btn"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><button class="menu-btn"> Profile </button></a>
+    <a href="{{ url_for('main.view_my_groups') }}"><button class="menu-btn"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><button class="menu-btn">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
       {% endif %}
-    </button></a>
-
-  </div>
+    </button>
+  </a>
+</div>
 
   <h1>Message Board</h1>
 
@@ -139,34 +41,33 @@
 
   <!-- Left box: Recent Conversations + Search -->
   <div class="flex-box">
-    <h3>Recent Conversations</h3>
-    <ul>
-      {% for user, unread in recent_contacts %}
-        <li>
-          <a href="{{ url_for('auth.message_user', user_id=user.id) }}"><button>
-            {{ user.name }}
-            {% if unread > 0 %}
-              <span class="notif-dot"></span>
-            {% endif %}
-          </button></a>
-        </li>
-      {% else %}
-        <li>No recent conversations</li>
-      {% endfor %}
-    </ul>
+      <h3>Recent Conversations</h3>
+      <ul>
+        {% for user, unread in recent_contacts %}
+          <li>
+            <a href="{{ url_for('auth.message_user', user_id=user.id) }}">
+              <button class="card-btn">
+                {{ user.name }}
+                {% if unread > 0 %}<span class="notif-dot"></span>{% endif %}
+              </button>
+            </a>
+          </li>
+        {% else %}
+          <li>No recent conversations</li>
+        {% endfor %}
+      </ul>
 
     <!-- Search bar goes inside left box -->
     <form method="GET" action="{{ url_for('auth.message') }}">
-      <input
-        type="text"
-        id="user-search"
-        placeholder="Search users..."
-        autocomplete="off">
-      <div id="suggestions" style="border: 1px solid #ccc; display: none;"></div>
-      <button type="submit">Search</button>
-    </form>
-
-  </div>
+        <input
+          type="text"
+          id="user-search"
+          placeholder="Search users..."
+          autocomplete="off">
+        <button type="submit" class="card-btn">Search</button>
+      </form>
+      <div id="suggestions"></div>
+    </div>
 
   <!-- Right box: Sent messages -->
   <div class="flex-box">

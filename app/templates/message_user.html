@@ -3,107 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Send Message</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .menu {
-      width: 100%;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .chat-container {
-      width: 90%;
-      max-width: 600px;
-      text-align: left;
-    }
-
-    .chat-box {
-      max-height: 300px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 15px;
-      background: #f9f9f9;
-    }
-
-    .chat-box ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .chat-box li {
-      margin-bottom: 10px;
-    }
-
-    form textarea {
-      width: 100%;
-      }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      color: #333;
-    }
-
-    .user-info:hover {
-      color: #007bff;
-    }
-
-    .user-avatar {
-      width: 28px;
-      height: 28px;
-      background-color: #007bff;
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 28px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .user-area {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background-color: #f3f3f3;
-      padding: 6px 10px;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    }
-
-    .logout-button {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-      display: inline-block;
-    }
-
-    .logout-button:hover {
-      background-color: #c82333;
-      text-decoration: none;
-    }
-
-  </style>
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='message_user_styles.css') }}">
 </head>
 
 <body>
@@ -121,21 +21,19 @@
     </div>
   {% endif %}
 
-
-  <div class="menu">
-
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.create_group') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
-      Messages
-      {% if unread_count > 0 %}
-        <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
-      {% endif %}
-    </button></a>
-
-  </div>
-
+  <header class="site-header">
+    <div class="menu">
+      <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
+      <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
+      <a href="{{ url_for('main.view_my_groups') }}"><button> Groups </button></a>
+      <a href="{{ url_for('auth.message') }}"><button>
+        Messages
+        {% if unread_count > 0 %}
+          <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
+        {% endif %}
+      </button></a>
+    </div>
+  </header>
   <div class="chat-container">
 
 
@@ -155,8 +53,8 @@
     <div class="chat-box">
       <ul>
         {% for m in messages %}
-          <li style="text-align: {% if m.sender_id == current_user.id %}right{% else %}left{% endif %};">
-            <div style="display: inline-block; background-color: {% if m.sender_id == current_user.id %}#d0f0c0{% else %}#f0f0f0{% endif %}; padding: 8px 12px; border-radius: 10px; max-width: 70%;">
+          <li class="{% if m.sender_id == current_user.id %}sent{% else %}received{% endif %}">
+            <div class="bubble">
               <strong>{{ 'You' if m.sender_id == current_user.id else m.sender.name }}:</strong><br>
               {{ m.content }}<br>
               <em style="font-size: 0.8em; color: #666;">{{ m.posted_at.strftime('%Y-%m-%d %H:%M') }}</em>
@@ -175,7 +73,7 @@
     </form>
   </div>
 
-  <a href="{{ url_for('auth.message') }}"><button>← Back to Message</button></a>
+  <a href="{{ url_for('auth.message') }}" class="button-back">← Back to Messages</a>
 
   <script>
     const chatBox = document.querySelector('.chat-box');
