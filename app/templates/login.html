@@ -2,41 +2,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Login </title>
+    <title> Login | SCSU Study Group Finder </title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='login_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}"> 
     <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
  <body>
+
     <!--user is logging into their account -->
-    
-        <div class="login justify-content-center">
+  <div class="login justify-content-center">
+    <div class="text-left">
+    <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
+  </div>
+  <br>
     <form method="POST" class="form-container">
-      <div class="form1">
-        <br><br>
+      <div class="form">
     {{ form.hidden_tag() }}
     {{ form.southern_email.label }} 
-    {{ form.southern_email(placeholder="Enter your email") }}
-    </div>
-
-    <div class="form3">
+    {{ form.southern_email(placeholder="Enter your email", size=30 ) }}
+    <br>
+    <br>
     {{ form.password.label }} 
-    {{ form.password(placeholder="Enter your password") }}
+    {{ form.password(placeholder="Enter your password", size=30) }}
     </div>
     <br>
       <button type="submit" class="btn btn-primary">Login</button>
-    <br> 
     </form>
-    <div class="text-center">
-        <a href="{{ url_for('auth.register') }}"><type="button" class="btn btn-primary" id="accountButton"> New User? Create an Account</button></a>
-    </div>
-    <br>
-</div>
-  <div class="text-center">
-    <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
-  </div>
-<div class="errormessage">
+    <div class="errormessage">  <div class="alert">
    {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <ul class="flashes">
@@ -48,15 +43,23 @@
       </ul>
     {% endif %}
   {% endwith %}
+  </div>
+  </div>
+    <div class="text-center">
+        <a href="{{ url_for('auth.register') }}"><type="button" class="btn btn-primary btn-lg" id="accountButton"> New User? Create an Account</button></a>
+    </div>
 </div>
- <!--   <script>
-        function accountButton() {
-            document.getElementById("accountButton").onclick = function() {
->>>>>>> 9c6d83a36452b4d94888538f07970b4cdc87e44c
-                window.location.href = "/register";
+  
+
+ 
+
+    <script>
+        function submit() {
+            document.getElementById("submitButton").onclick = function() {
+                window.location.href = "/login";
             };
         }
     </script>
-  -->
+  
  </body>
 </html> 

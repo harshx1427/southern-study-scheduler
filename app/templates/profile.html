@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Profile</title>
+  <title>Profile | SCSU Study Group Finder</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <style>
    
 
@@ -75,10 +76,10 @@
 
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.view_my_groups') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><type="button" class="btn btn-primary"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><type="button" class="btn btn-primary"> Profile </button></a>
+    <a href="{{ url_for('main.view_my_groups') }}"><type="button" class="btn btn-primary"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><type="button" class="btn btn-primary">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>

@@ -6,7 +6,7 @@
   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
 
 <a href="{{ url_for('main.view_group', group_id=group.id) }}"><button class="btn btn-primary">← Back to Group</button></a>
-  <h2>Create A Thread </h2>
+  <h2>Create A Thread</h2>
   <form method="post" style="border: 2px solid rgb(255, 255, 255); border-radius: 8px; box-shadow: #111 0px 2px 5px; background-color: aliceblue; padding: 20px; padding-left: 100px; margin-right: 300px; margin-top: 50px;">
     {{ form.hidden_tag() }}
     {{ form.title.label }}<br>

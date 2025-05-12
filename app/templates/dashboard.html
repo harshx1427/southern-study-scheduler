@@ -1,30 +1,17 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Dashboard</title>
+  <title>Dashboard | SCSU Study Group Finder</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">  
   <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
-  <div class="grouperror">
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <ul class="flashes">
-        {% for category, message in messages %}
-          {% if category == 'group_success' or category == 'warning' %}
-          <div class="createsuccess" >
-            <li class="{{ category }}">{{ message }}</li>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-  </div>
+  
 
   {% if current_user.is_authenticated %}
     <div class="user-area">
@@ -62,21 +49,22 @@
   <div class="navbar">
     <a href="{{ url_for('main.create_group') }}" class="btn btn-primary btn-lg" button> Create a Study Group </button></a>
   </div>
-
   </header>
 
-  <form method="GET" action="{{ url_for('main.dashboard') }}" class="search-form">
+  <form method="GET" action="{{ url_for('main.dashboard') }}" class="search-form searchhead">
     <input
       type="text"
       name="q"
       placeholder="Search groups by name"
+       size=30
       value="{{ q }}">
-      
+
     <button type="submit" class="btn btn-secondary">Search</button>
   </form>
   <div class="listgrouphead">
    <h2>List of Groups</h2>
-   </div>
+  </div>
+   
   <div class="group-container">
     <ul class="group-list">
 
@@ -84,7 +72,7 @@
       <li class="group-item">
         <h3>
           <a href="{{ url_for('main.view_group', group_id=group.id) }}">
-          <button class="btn btn-primary">{{ group.name }}</button>
+          <button class="btn btn-primary btn-lg">{{ group.name }}</button>
         </a>
       </h3>
         <p>{{ group.description }}</p>
@@ -101,13 +89,23 @@
         {% endfor %}
       {% endwith %}
 </div>
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-sm p-2 text-white">
         {% if group.id in member_group_ids %}
           <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
-            <button type="submit" class="btn btn-danger">Leave Group</button>
+            <button type="submit" class="btn btn-warning">Leave Group</button>
           </form>
-        {% else %}
+          <br>
+          <form method="POST" action="{{ url_for('main.delete_group', group_id=group.id) }}">
+            <button type="submit" class="btn btn-danger btn-sm">Delete Group</button>
+          </form></div>
+    <div class="col-sm p-2 text-white"> {% else %}
           <form method="POST" action="{{ url_for('main.join_group', group_id=group.id) }}">
-            <button type="submit" class="btn btn-success">Join Group</button>
+            <button type="submit" class="btn btn-success">Join Group</button></div>
+  </div>
+</div>
+         
           </form>
         {% endif %}
       </li>
@@ -116,7 +114,22 @@
     {% endfor %}
     </ul>
   </div>
-
+<div>  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+   <div class="alert" role="alert">
+      <ul class="flashes"> 
+        {% for category, message in messages %}
+          {% if category == 'group_success' or category == 'warning' %}
+          <div class="alert-success createsuccess" >
+            <li class="{{ category }}">{{ message }}</li>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  </div>
+  </div>
 </body>
 </html>
 

@@ -2,7 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Create an Account </title>
+    <title> Create an Account | SCSU Study Group Finder</title>
+          <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
  </head>
  <body>
 
@@ -11,34 +12,24 @@
    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
     <!-- user is creating their study group finder account -->
    <div class="register justify-content-center">
-    <br>
+    <div class="text-left">
+        <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
    <form method="POST" class="form-container">
-    <div class="form1">
-            {{ form.name.label }}
-            {{ form.name(placeholder="Enter your full name") }}
-        </div>
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name() }}<br>
+    {{ form.southern_email.label }} {{ form.southern_email() }} <br>
+    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.confirm_password.label }} {{ form.confirm_password() }}<br>
+  <button type="submit" class="btn btn-primary"> Register </button> 
+</form>
 
-        <div class="form2">
-            {{ form.southern_email.label }}
-            {{ form.southern_email(placeholder="Enter your email") }}
-        </div>
-
-        <div class="form3">
-            {{ form.password.label }}
-            {{ form.password(placeholder="Enter a new password") }}
-        </div>
-
-        <div class="form4">
-            {{ form.confirm_password.label }}
-            {{ form.confirm_password(placeholder="Verify new password") }}
-        </div>
-
-<br>
-  <button type="submit" class="btn btn-primary"> Register </button>
-    </form>
 </div>
-<div class="backtomain">
-      <a href="{{ url_for('main.index') }}"><button type="button" class="btn btn-primary">← Back to Main</button></a>
-      </div>
+ <script>
+        function accountButton() {
+            document.getElementById("accountButton").onclick = function() {
+                window.location.href = "/register";
+            };
+        }
+    </script>
  </body>
 </html>

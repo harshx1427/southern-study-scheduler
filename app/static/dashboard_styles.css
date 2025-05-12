@@ -18,6 +18,7 @@
     text-align: center;
     
  }   
+ 
 .listgrouphead{
   position: fixed;
     width: 320px;
@@ -29,6 +30,21 @@
     margin-left: auto;
     margin-right: auto; 
     margin-top: 270px;
+    box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
+
+.searchhead{
+  position: fixed;
+    width: auto;
+    height: 60px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 200px;
     box-shadow: #111 0px 5px 10px;
   animation: fadein 2s;
 }
@@ -262,10 +278,20 @@ body::before {
     .back-link button:hover {
       background-color: #5a6268;
     }
-
-    .createsuccess{
-      margin-top: 500px;
-    }
+.createsuccess{
+  position: fixed;
+    width: auto;
+    height: 60px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: 300px;
+    margin-right: auto; 
+    margin-bottom: 200px;
+    box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
+}
 
     .group_details{
       margin-left: auto;

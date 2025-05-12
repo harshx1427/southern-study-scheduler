@@ -21,7 +21,11 @@
       <div class="group-actions">
         {% if is_member %}
           <form method="POST" action="{{ url_for('main.leave_group', group_id=group.id) }}">
-            <button class="btn btn-danger">Leave Group</button>
+            <button class="btn btn-warning">Leave Group</button>
+          </form>
+          <br>
+          <form method="POST" action="{{ url_for('main.delete_group', group_id=group.id) }}">
+            <button type="submit" class="btn btn-danger btn-sm">Delete Group</button>
           </form>
         {% else %}
           <form method="POST" action="{{ url_for('main.join_group', group_id=group.id) }}">

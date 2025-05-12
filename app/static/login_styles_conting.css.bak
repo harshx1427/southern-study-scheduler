@@ -15,41 +15,47 @@ body {
 
 
 form{
-    font-family: Arial, Helvetica, sans-serif, sans-serif;
+  font-family: Arial, Helvetica, sans-serif, 'Times New Roman', Times, sans-serif;
   text-align: center;
 }
-.register{
+.login{
   position: fixed;
     width: 520px;
     height: 350px;
     padding: 10px;
     background-color: #fff;
-    border: 1px solid gray;
+    
     border-radius: 8px;
     margin-left: 700px;
     margin-top: 300px;
     box-shadow: #111 0px 5px 10px;
 }
 
-.form1 {
-            margin: 10px 0;
-            text-align: center;
-        }
-  
-.form2 {
-            margin: 10px 0;
-            text-align: center;
-            margin-right: 70px;
-        }
- 
-.form3 {
-            margin: 10px 0;
-            text-align: center;
-            margin-right: 25px;
-        }
+.errormessage{
+   text-align: center;
+  margin-top: 20px;
+  margin-right: 20px;
 
- .form4 {
-            margin: 10px 0;
-            text-align: center;
-            margin-right: 88px;
-        }       
+.backmain{
+  box-shadow: #111 0px 5px 10px;
+}
+
+.form1{
+   margin: 10px 0;
+  text-align: center;
+  margin-right: 50px;
+  
+}
+
+.form3{
+   margin: 10px 0;
+  text-align: center;
+  margin-right: 8px;
+}
+
+.backtomain{
+  position: fixed;
+  margin-top: 580px;
+  margin-left: 890px;
+}
+

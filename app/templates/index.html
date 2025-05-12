@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Study Group Finder</title>
+  <title>Study Group Finder | SCSU Study Group Finder</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='index_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+          <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
-  <div class="home"> <h3> Welcome to Study Group Finder!</h3>
+  <div class="home"> <h3>Welcome to Study Group Finder!</h3>
 <br><br>
   <div class="text-center">
   <a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-primary btn-lg mx-auto" width="10px">Log In</button></a></div>
@@ -19,7 +20,7 @@
     <div class="text-center">
             <a href="{{ url_for('auth.register') }}">
             
-                <button type="button" class="btn btn-primary">Register to get started</button></a>
+                <button type="button" class="btn btn-primary btn-lg">Register to get started</button></a>
     </div>
 <div class="error">
   {% with messages = get_flashed_messages(with_categories=true) %}
