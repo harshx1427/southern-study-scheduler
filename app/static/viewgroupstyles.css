@@ -45,11 +45,30 @@ h3{
     to {opacity: 2;}
 }
 .creategrouptext{
-      position: fixed;
-    margin-left: 950px;
-    margin-top: 200px;
+  position: fixed;
+    width: 520px;
+    height: 350px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid gray;
+    border-radius: 8px;
+    margin-left: 50px;
+    margin-top: 205px;
+    box-shadow: #111 0px 5px 10px;
+  animation: fadein 2s;
 }
 
+
+.creategroupbutton{
+    position: fixed;
+    margin-top: 0px;
+    margin-left: 180px;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 2;}
+}
 .joinedgrouphead{
     position: fixed;
     width: 320px;
@@ -91,6 +110,12 @@ h3{
     position: fixed;
     margin-left: 950px;
     margin-top: 250px;
+}
+
+.joingrouptextno{
+    position: fixed;
+    margin-left: 750px;
+    margin-top: 450px;
 }
 
 .findgroupbutton{

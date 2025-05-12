@@ -10,20 +10,8 @@
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
-<body class="dashboard">
-  <div class="grouperror">
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <ul class="flashes">
-        {% for category, message in messages %}
-          {% if category == 'group_success' or category == 'warning' %}
-            <li class="{{ category }}">{{ message }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-  </div>
+<body>
+  
 
   {% if current_user.is_authenticated %}
     <div class="user-area">

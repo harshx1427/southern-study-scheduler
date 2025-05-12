@@ -32,10 +32,12 @@
         </div>
       {% else %}
         <div class="creategrouptext">
-        <p>No groups created yet.<br>
+        <p style="margin-left: 150px; margin-top: 70px;">No groups created yet.<br>
            Want to create a group?
            <a href="{{ url_for('main.create_group') }}">
+            <div class="creategroupbutton">
              <button class="btn btn-primary">Create A Group</button>
+             </div>
            </a>
         </p>
         </div>
@@ -60,7 +62,7 @@
         </p>
       {% else %}
       </div>
-        <div class="joingrouptext">
+        <div class="joingrouptextno">
         <p>No groups joined yet.<br>
            Want to join a group?
            <a href="{{ url_for('main.dashboard') }}">

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Send Message</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <title>Send Message | SCSU Study Group Finder</title>
   <style>
     body {
       display: flex;
@@ -11,6 +12,7 @@
       font-family: sans-serif;
       margin: 0;
       padding: 20px;
+      background-color: antiquewhite;
     }
 
     .menu {
@@ -23,6 +25,7 @@
       width: 90%;
       max-width: 600px;
       text-align: left;
+      
     }
 
     .chat-box {
@@ -31,7 +34,10 @@
       border: 1px solid #ccc;
       padding: 10px;
       margin-bottom: 15px;
-      background: #f9f9f9;
+      background: #f0f0f0;
+      border: 2px solid rgb(255, 255, 255);
+      border-radius: 8px;
+      box-shadow: #111 0px 5px 10px;
     }
 
     .chat-box ul {
@@ -48,60 +54,12 @@
       width: 100%;
       }
 
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      color: #333;
-    }
+    
+.sendmessage{
+    margin-left: 500px;
+}
 
-    .user-info:hover {
-      color: #007bff;
-    }
-
-    .user-avatar {
-      width: 28px;
-      height: 28px;
-      background-color: #007bff;
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 28px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .user-area {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background-color: #f3f3f3;
-      padding: 6px 10px;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    }
-
-    .logout-button {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-      display: inline-block;
-    }
-
-    .logout-button:hover {
-      background-color: #c82333;
-      text-decoration: none;
-    }
-
+    
   </style>
 
 </head>
@@ -128,10 +86,10 @@
 
   <div class="menu">
 
-    <a href="{{ url_for('main.dashboard') }}"><button> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button> Profile </button></a>
-    <a href="{{ url_for('main.view_my_groups') }}"><button> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button>
+    <a href="{{ url_for('main.dashboard') }}"><type="button" class="btn btn-primary"> Home </button></a>
+    <a href="{{ url_for('main.profile') }}"><type="button" class="btn btn-primary"> Profile </button></a>
+    <a href="{{ url_for('main.view_my_groups') }}"><type="button" class="btn btn-primary"> Groups </button></a>
+    <a href="{{ url_for('auth.message') }}"><type="button" class="btn btn-primary">
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
@@ -160,7 +118,7 @@
       <ul>
         {% for m in messages %}
           <li style="text-align: {% if m.sender_id == current_user.id %}right{% else %}left{% endif %};">
-            <div style="display: inline-block; background-color: {% if m.sender_id == current_user.id %}#d0f0c0{% else %}#f0f0f0{% endif %}; padding: 8px 12px; border-radius: 10px; max-width: 70%;">
+            <div style="display: inline-block; background-color: {% if m.sender_id == current_user.id %}#a7c6ff{% else %} #d0f0c0 {% endif %}; padding: 8px 12px; border-radius: 10px; max-width: 70%;">
               <strong>{{ 'You' if m.sender_id == current_user.id else m.sender.name }}:</strong><br>
               {{ m.content }}<br>
               <em style="font-size: 0.8em; color: #666;">{{ m.posted_at.strftime('%Y-%m-%d %H:%M') }}</em>
@@ -181,7 +139,7 @@
     </form>
   </div>
 
-  <a href="{{ url_for('auth.message') }}"><button>← Back to Message</button></a>
+  <a href="{{ url_for('auth.message') }}"><button class="btn btn-primary">← Back to Messages </button></a>
 
   <script>
     const chatBox = document.querySelector('.chat-box');

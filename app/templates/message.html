@@ -2,10 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<<<<<<< HEAD
-  <title>Message</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='message_styles.css') }}">
-=======
   <title>Messages | SCSU Study Group Finder</title>
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <style>
@@ -111,7 +107,6 @@
 
   </style>
 
->>>>>>> amir-branch
 </head>
 
 <body>
@@ -133,26 +128,19 @@
     </div>
   {% endif %}
 
-<div class="menu">
+  <div class="menu">
 
-<<<<<<< HEAD
-    <a href="{{ url_for('main.dashboard') }}"><button class="menu-btn"> Home </button></a>
-    <a href="{{ url_for('main.profile') }}"><button class="menu-btn"> Profile </button></a>
-    <a href="{{ url_for('main.view_my_groups') }}"><button class="menu-btn"> Groups </button></a>
-    <a href="{{ url_for('auth.message') }}"><button class="menu-btn">
-=======
     <a href="{{ url_for('main.dashboard') }}"><type="button" class="btn btn-primary"> Home </button></a>
     <a href="{{ url_for('main.profile') }}"><type="button" class="btn btn-primary"> Profile </button></a>
     <a href="{{ url_for('main.view_my_groups') }}"><type="button" class="btn btn-primary"> Groups </button></a>
     <a href="{{ url_for('auth.message') }}"><type="button" class="btn btn-primary">
->>>>>>> amir-branch
       Messages
       {% if unread_count > 0 %}
         <span style="color: red; font-weight: bold;">({{ unread_count }})</span>
       {% endif %}
-    </button>
-  </a>
-</div>
+    </button></a>
+
+  </div>
 
   <h2> Message Board </h2>
 
@@ -160,35 +148,6 @@
 
   <!-- Left box: Recent Conversations + Search -->
   <div class="flex-box">
-<<<<<<< HEAD
-      <h3>Recent Conversations</h3>
-      <ul>
-        {% for user, unread in recent_contacts %}
-          <li>
-            <a href="{{ url_for('auth.message_user', user_id=user.id) }}">
-              <button class="card-btn">
-                {{ user.name }}
-                {% if unread > 0 %}<span class="notif-dot"></span>{% endif %}
-              </button>
-            </a>
-          </li>
-        {% else %}
-          <li>No recent conversations</li>
-        {% endfor %}
-      </ul>
-
-    <!-- Search bar goes inside left box -->
-    <form method="GET" action="{{ url_for('auth.message') }}">
-        <input
-          type="text"
-          id="user-search"
-          placeholder="Search users..."
-          autocomplete="off">
-        <button type="submit" class="card-btn">Search</button>
-      </form>
-      <div id="suggestions"></div>
-    </div>
-=======
     <div class="recentheader">
     <h3>Recent Conversations</h3>
     </div>
@@ -219,7 +178,6 @@
     </form>
 
   </div>
->>>>>>> amir-branch
 
   <!-- Right box: Sent messages -->
   <div class="flex-box">
