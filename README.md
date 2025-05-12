@@ -11,10 +11,8 @@ Admin dashboard to manage user listings
 
 ## Technology used
 
-Python (Flask)
-HTML, CSS, JavaScript
-SQL
-Bootstrap
+Python (Flask),
+HTML, CSS, JavaScript, JQuery, SQL, and Bootstrap
 
 
 ## Installation
