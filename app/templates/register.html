@@ -9,11 +9,13 @@
    <link rel="stylesheet" href="{{ url_for('static', filename='register_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
    <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+
     <!-- user is creating their study group finder account -->
    <div class="register justify-content-center">
     <br>
    <form method="POST" class="form-container">
     <div class="form1">
+            {{ form.hidden_tag() }}
             {{ form.name.label }}
             {{ form.name() }}
         </div>
@@ -31,10 +33,10 @@
         <div class="form4">
             {{ form.confirm_password.label }}
             {{ form.confirm_password() }}
+            {{ form.submit(type="submit", class="btn btn-primary") }}
         </div>
 
 <br>
-  <button type="submit" class="btn btn-primary"> Register </button>
     </form>
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
