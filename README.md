@@ -35,5 +35,5 @@ Flask App Not Running
 source venv/bin/activate
 pip install Flask
 ```
-## liscence
-[SUSC](https://www.southernct.edu/)
+## Liscense
+[SCSU](https://www.southernct.edu/)
